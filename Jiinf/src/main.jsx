@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Home } from './pages/Home.jsx';
+import { Teams } from './pages/Teams.jsx';
+import { Calendar } from './pages/Calendar.jsx';
+import { Modalitys } from './pages/Modalitys.jsx';
 
 const router = createBrowserRouter([
   {
@@ -11,7 +15,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home/>
       },
+      {
+         path: "/teams",
+         element: <Teams/>
+      },
+      {
+         path: "/calendar",
+         element: <Calendar/>
+      },
+      {
+         path: "/modalitys",
+         element: <Modalitys/>
+      }
     ]
   },
 ]);

@@ -1,6 +1,4 @@
-import { ResultTable } from "../components/ResultTable";
-
-export function Home() {
+export function Modalitys() {
 
     return (
         <div>

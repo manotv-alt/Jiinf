@@ -8,7 +8,8 @@ export default {
     extend: {
       colors: {
         jiinf: {
-
+          primary: "#4922A4",
+          secondary: "#593E99",
         },
       },
     },
