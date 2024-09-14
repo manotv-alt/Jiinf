@@ -1,4 +1,4 @@
-import { ResultTable } from "../components/ResultTable";
+
 
 export function Home() {
 
