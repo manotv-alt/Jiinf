@@ -6,11 +6,11 @@ import { DataProvider } from './contexts/DataContext'
 function App() {
 
   return (
-    <div className='min-h-screen flex flex-col bg-black/50'>
+    <div className='min-h-screen flex flex-col bg-jiinf-background'>
       <Header/>
 
       <DataProvider>
-        <main className='flex-grow mb-16'>
+        <main className='flex-grow mb-20'>
           <Outlet/>
         </main>
       </DataProvider>

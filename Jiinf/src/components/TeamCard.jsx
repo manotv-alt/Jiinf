@@ -1,12 +1,15 @@
-const TeamCard = () => {
+import React from 'react';
 
+const TeamCard = ({ title, description, imageSrc }) => {
   return (
-    <div className="bg-jiinf-primary rounded-lg shadow-md p-[92px] max-w-xs mx-auto ring-2 ring-white h-96">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Sem Risadinha</h2>
-      <p className="text-gray-600 mb-4">dfgdgdf</p>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        fsfdffsdf
-      </button>
+    <div className="justify-center ring-2 ring-white items-center max-w-xs bg-jiinf-primary rounded-xl shadow-md overflow-hidden m-4 text-white">
+      <div className="p-4">
+        <h2 className="text-3xl font-bold mb-2 text-center pb-4">{title}</h2>
+        <div className="flex justify-center pb-4">
+          <img className="rounded-full ring-2 ring-white h-36 w-36" src={imageSrc} alt={title} />
+        </div>
+        <p className="mt-4 font-semibold text-sm text-center">{description}</p>
+      </div>
     </div>
   );
 };

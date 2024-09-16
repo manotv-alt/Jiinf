@@ -17,7 +17,7 @@ export function Calendar() {
     return (
         <div className="flex flex-col items-center justify-center w-full h-full">
             
-            <div className="flex px-4 flex-row w-full justify-center gap-16 p-20">
+            <div className="flex px-4 flex-col sm:flex-row w-full items-center justify-center gap-8 sm:gap-24 p-20">
                 <DatePicker label={label} onChange={changeDate}/>
                 <TeamPicker/>
             </div>
