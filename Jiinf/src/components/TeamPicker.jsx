@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
-import { CalendarIcon } from '@heroicons/react/24/outline'; // Importa o ícone de calendário
+import { useState, useEffect } from 'react';
+import { CalendarIcon } from '@heroicons/react/24/outline';
+import { Fetch } from '../api/consumer';
 
 const TeamPicker = ({ onChange }) => {
-  const [selectedTeam, setSelectedTeam] = useState('');
 
-  const Teams = [
-    { value: 'Sem risadinha', label: 'Sem risadinha' },
-    { value: 'Morde chinelo', label: 'Morde chinelo' },
-    { value: 'Coisa ruim', label: 'Coisa ruim' },
-    { value: 'Coisa asd', label: 'Coisa asd' },
-  ];
+  const [selectedTeam, setSelectedTeam] = useState('');
+  const [teamsData, setTeamsData] = useState([]);
+
+  useEffect (() => {
+
+    async function setSearch () {
+        try {
+        const url = new Fetch ("https://jiinf.vercel.app");
+        const ax = await url.GetTimes();
+        setTeamsData(ax);
+
+        } catch(error) {
+            console.log(error);
+        }
+        
+    }
+
+    setSearch();
+    
+  }, [])
 
   const handleTeamChange = (event) => {
     const { value } = event.target;
@@ -27,9 +41,9 @@ const TeamPicker = ({ onChange }) => {
         className="border border-jiinf-primary text-jiinf-primary rounded-lg px-10 py-2 pr-10 bg-white appearance-none"
       >
         <option value="" disabled>Escolha uma Equipe</option>
-        {Teams.map((Team) => (
-          <option key={Team.value} value={Team.value}>
-            {Team.label}
+        {teamsData.map((Team) => (
+          <option key={Team.nome} value={Team.nome}>
+            {Team.nome}
           </option>
         ))}
       </select>

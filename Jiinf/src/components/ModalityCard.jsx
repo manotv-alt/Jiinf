@@ -4,7 +4,7 @@ export function ModalityCard({ name, description, imgSrc }) {
   const [hovered, setHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  imgSrc = 'https://th.bing.com/th/id/OIP.ELzBEevVy38sKTNCERiTZQHaFL?rs=1&pid=ImgDetMain';
+  console.log(imgSrc);
 
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => {
@@ -14,8 +14,8 @@ export function ModalityCard({ name, description, imgSrc }) {
 
   const handleMouseMove = (e) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - left) / width - 0.5) * 40; // Ajusta a intensidade do efeito X
-    const y = ((e.clientY - top) / height - 0.5) * 40; // Ajusta a intensidade do efeito Y
+    const x = ((e.clientX - left) / width - 0.5) * 40;
+    const y = ((e.clientY - top) / height - 0.5) * 40;
     setMousePosition({ x, y });
   };
 
@@ -23,7 +23,7 @@ export function ModalityCard({ name, description, imgSrc }) {
     <div
       className="relative aspect-[9/13] w-80 overflow-hidden bg-jiinf-lightskin border-jiinf-secondary border-2 rounded-lg"
       style={{
-        //backgroundImage: `url(${imgSrc})`,
+        backgroundImage: `url(${imgSrc})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transform: `rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
