@@ -92,12 +92,12 @@ export function Modalitys() {
             {modalitys.map((sport, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 w-full justify-center items-center px-8 sm:px-16 md:px-12 lg:px-8"
+                className="flex-shrink-0 gap-12 w-full justify-center items-center px-8 sm:px-16 md:px-12 lg:px-8"
               >
                 <ModalityCard
                   name={sport.nome}
                   description={sport.desc}
-                  imageSrc={sport.url_image}
+                  imgSrc={sport.url_image}
                 />
               </div>
             ))}

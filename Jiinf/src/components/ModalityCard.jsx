@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 export function ModalityCard({ name, description, imgSrc }) {
+
   const [hovered, setHovered] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -9,7 +10,7 @@ export function ModalityCard({ name, description, imgSrc }) {
   const handleMouseEnter = () => setHovered(true);
   const handleMouseLeave = () => {
     setHovered(false);
-    setMousePosition({ x: 0, y: 0 }); // Reseta a posição do card
+    setMousePosition({ x: 0, y: 0 });
   };
 
   const handleMouseMove = (e) => {
@@ -21,9 +22,8 @@ export function ModalityCard({ name, description, imgSrc }) {
 
   return (
     <div
-      className="relative aspect-[9/13] w-80 overflow-hidden bg-jiinf-lightskin border-jiinf-secondary border-2 rounded-lg"
+      className="relative aspect-[9/13] w-80 overflow-hidden bg-jiinf-lightskin border-jiinf-primary border-4 rounded-lg"
       style={{
-        backgroundImage: `url(${imgSrc})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transform: `rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
@@ -40,15 +40,15 @@ export function ModalityCard({ name, description, imgSrc }) {
           transition: 'transform 0.05s ease-in-out',
         }}
       >
-        <h3 className="text-2xl font-bold pb-4 mb-2">{name}</h3>
-        <p className="text-lg pb-4 mb-4">
+        <div className="flex h-full justify-center mt-4 mb-4">
+          <img src={imgSrc} alt="Ícone do Esporte" className="w-36 h-36 rounded-full border-2 border-black" />
+        </div>
+        <h3 className="text-4xl font-bold pb-4 mb-2 text-center">{name}</h3>
+        <p className="text-lg pb-4 mb-4 font-semibold text-center">
           {description}
         </p>
-        <div className="flex items-center space-x-2">
-          <img src={imgSrc} alt="Ícone do Esporte" className="w-12 h-12 rounded-full border-2 border-white" />
-          <span className="pl-4 text-sm">{name}</span>
-        </div>
       </div>
     </div>
   );
+  
 }

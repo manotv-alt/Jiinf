@@ -40,7 +40,7 @@ const TeamPicker = ({ onChange }) => {
         onChange={handleTeamChange}
         className="border border-jiinf-primary text-jiinf-primary rounded-lg px-10 py-2 pr-10 bg-white appearance-none"
       >
-        <option value="" disabled>Escolha uma Equipe</option>
+        <option value="" >Todas as Equipes</option>
         {teamsData.map((Team) => (
           <option key={Team.nome} value={Team.nome}>
             {Team.nome}

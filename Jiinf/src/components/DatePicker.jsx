@@ -5,11 +5,11 @@ const DatePicker = ({ onChange }) => {
   const [selectedDate, setSelectedDate] = useState('');
 
   const dates = [
-    { value: '1', label: '19 de Outubro de 2024' },
-    { value: '2', label: '20 de Outubro de 2024' },
-    { value: '3', label: '26 de Outubro de 2024' },
-    { value: '4', label: '02 de novembro de 2024' },
-    { value: '5', label: '03 de novembro de 2024' },
+    { value: "1", label: '19 de Outubro de 2024' },
+    { value: "2", label: '20 de Outubro de 2024' },
+    { value: "3", label: '26 de Outubro de 2024' },
+    { value: "4", label: '02 de novembro de 2024' },
+    { value: "5", label: '03 de novembro de 2024' },
   ];
 
   const handleDateChange = (event) => {
@@ -28,7 +28,7 @@ const DatePicker = ({ onChange }) => {
         onChange={handleDateChange}
         className="border border-jiinf-primary text-jiinf-primary rounded-lg px-10 py-2 pr-10 bg-white appearance-none"
       >
-        <option value="" disabled>Escolha uma data</option>
+        <option value="">Todas as Datas</option>
         {dates.map((date) => (
           <option key={date.value} value={date.value}>
             {date.label}

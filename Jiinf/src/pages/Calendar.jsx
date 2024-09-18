@@ -9,7 +9,7 @@ export function Calendar() {
 
   const { data, error } = useContext(DataContext);
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTeam, setSelectedTeam] = useState("");
+  const [selectedTeam, setSelectedTeam] = useState();
   const [gameData, setGameData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,16 +32,15 @@ export function Calendar() {
     bla();
   }, []);
 
-  console.log(gameData);
-
   const filteredGames = gameData.filter((game) => {
-    const matchesDate = selectedDate ? game.data === selectedDate : true;
-    const matchesTeam = selectedTeam
-      ? game.TimeA.nome === selectedTeam || game.TimeB.nome === selectedTeam
-      : true;
+    
+    const matchesTeam = selectedTeam ? game.TimeA.nome === selectedTeam || game.TimeB.nome === selectedTeam : true;
+    const matchesDate = selectedDate ? game.data.toString() === selectedDate : true;
 
     return matchesDate && matchesTeam;
   });
+
+  
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
@@ -62,7 +61,7 @@ export function Calendar() {
               <GameCard key={index} game={game} />
             ))
           ) : (
-            <p>No games found</p>
+            <h2 className="flex w-full h-full justify-center items-center text-3xl font-semibold">Nenhum esporte encontrado</h2>
           )}
         </div>
       )}

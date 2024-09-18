@@ -9,20 +9,22 @@ export function Home() {
 
   const [teams, setTeams] = useState([]);
   const [hub, setHub] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect (() => {
 
     async function bla () {
         try {
         const url = new Fetch ("https://jiinf.vercel.app");
-        let ax = await url.GetTimes();
+        const ax = await url.GetTimes();
+        const ax2 = await url.GetHome();
         setTeams(ax);
-
-        ax = await url.GetHome();
-        setHub(ax);
+        setHub(ax2);
 
         } catch(error) {
             console.log(error);
+        } finally {
+          setLoading(false);
         }
         
     }
@@ -30,12 +32,20 @@ export function Home() {
     bla();
   }, [])
 
-  const sortedTeams = teams.sort((a, b) => b.points - a.points);
+  const sortedTeams = teams.sort((a, b) => b.pontuacao_total - a.pontuacao_total);
 
   return (
+
+    <div className="w-full px-8 sm:px-12 md:px-12 lg:px-16">
+      {loading ? (
+          <div className="flex mt-16 justify-center items-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-jiinf-primary"></div>
+          </div>
+        ) : (
+
     <div className="relative flex flex-col justify-center items-center min-h-screen min-w-screen rounded-lg bg-white mx-12 mt-12">
       <img 
-        src={hub.url_background} 
+        src={hub[0].url_background} 
         alt="bg-home"
         className="flex min-h-screen min-w-screen rounded-lg"
       />
@@ -67,6 +77,8 @@ export function Home() {
           ))}
         </div>
       </div>
+    </div>
+    )}
     </div>
   );
 }
