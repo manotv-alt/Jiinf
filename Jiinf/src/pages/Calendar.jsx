@@ -9,7 +9,7 @@ export function Calendar() {
 
   const { data, error } = useContext(DataContext);
   const [selectedDate, setSelectedDate] = useState("");
-  const [selectedTeam, setSelectedTeam] = useState();
+  const [selectedTeam, setSelectedTeam] = useState("");
   const [gameData, setGameData] = useState([]);
   const [loading, setLoading] = useState(true);
 

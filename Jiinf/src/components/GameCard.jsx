@@ -3,7 +3,7 @@ import hand from '../assets/handball.png';
 const GameCard = ({ game }) => {
 
   return (
-    <div className="w-10/12 ring-2 ring-jiinf-primary mx-auto bg-jiinf-lightskin text-white p-4 rounded-lg flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 mb-4 shadow-lg min-h-32 overflow-hidden">
+    <div className="w-10/12 ring-2 ring-jiinf-primary mx-auto bg-jiinf-lightskin text-white p-4 rounded-lg flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 mb-4 shadow-lg min-h-28 overflow-hidden">
       
       {/* Container para layout flexível */}
       <div className="flex flex-col md:flex-row w-full items-center">
@@ -23,22 +23,27 @@ const GameCard = ({ game }) => {
         <div className="hidden md:block w-[2px] h-32 bg-jiinf-primary mx-4"></div>
 
         {/* Middle Section: Times e Placar */}
-        <div className="flex flex-row md:flex-row items-center justify-center flex-1 mt-4 md:space-y-0 md:space-x-12 lg:space-x-24">
+        <div className="flex flex-row items-center justify-center flex-1 mt-4 md:space-y-0 md:space-x-12">
           {/* Time A */}
           <div className="flex h-full w-full flex-col justify-center items-center text-center mr-4">
-            <img src={game.TimeA.url_image || hand} alt="Logo do Time A" className="w-16 h-16 lg:w-24 lg:h-24 md:w-16 md:h-16 rounded-full mx-auto mb-1" />
+            <img src={game.TimeA.url_image || hand} alt="Logo do Time A" className="flex-1 w-16 h-16 rounded-full mx-auto mb-1" />
             <p className="text-lg font-semibold text-jiinf-primary">{game.TimeA.nome}</p>
-            <p className="text-4xl font-bold text-jiinf-primary">{game.placarA}</p>
+            
           </div>
 
           {/* VS */}
-          <p className="flex mx-2 text-4xl font-bold text-jiinf-primary">VS</p>
+          <div className='flex flex-row h-full justify-center items-center w-full'>
+          <p className="flex mr-2 lg:mr-6 text-4xl font-bold text-jiinf-primary">{game.placarA}</p>
+          <p className="flex mx-2 lg:mx-6 text-3xl font-bold text-jiinf-primary">VS</p>
+          <p className="flex ml-2 lg:ml-6 text-4xl font-bold text-jiinf-primary">{game.placarB}</p>
+          </div>
+          
 
           {/* Time B */}
           <div className="flex h-full w-full flex-col justify-center items-center text-center ml-4">
-            <img src={game.TimeB.url_image || hand} alt="Logo do Time B" className="w-16 h-16 lg:w-24 lg:h-24 md:w-16 md:h-16 rounded-full mx-auto mb-1" />
+            <img src={game.TimeB.url_image || hand} alt="Logo do Time B" className="flex-1 w-16 h-16 rounded-full mx-auto mb-1" />
             <p className="text-lg font-semibold text-jiinf-primary">{game.TimeB.nome}</p>
-            <p className="text-4xl font-bold text-jiinf-primary">{game.placarB}</p>
+            
           </div>
         </div>
 
