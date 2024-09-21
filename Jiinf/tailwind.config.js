@@ -16,6 +16,9 @@ export default {
           labels: "#1E0152",
         },
       },
+
+      fontFamily: {
+        pixel: ['"Pixelify Sans"', 'sans-serif'],      },
     },
   },
   plugins: [],

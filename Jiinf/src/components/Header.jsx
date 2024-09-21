@@ -7,8 +7,8 @@ export function Header() {
     const [currentPage, setCurrentPage] = useState();
     const { isCurrentPage } = usePath();
 
-    const current = 'flex text-jiinf-primary transition-all hover:text-jiinf-primary';
-    const general = 'flex text-white transition-all hover:text-jiinf-primary';
+    const current = 'flex font-semibold my-1 text-lg lg:text-xl text-jiinf-primary transition-all hover:text-jiinf-primary';
+    const general = 'flex font-semibold my-1 text-lg lg:text-xl text-white transition-all hover:text-jiinf-primary';
     const navItems = [
         { to: '/', label: 'Início' },
         { to: '/teams', label: 'Equipes' },
@@ -18,8 +18,9 @@ export function Header() {
 
     return (
         <header className="flex flex-col w-full justify-end items-center h-[140px] bg-jiinf-primary">
-            <section className="flex justify-left items-center h-full w-3/4">
-                <h1 className="flex text-white text-7xl">Jiinf</h1>
+            <section className="flex flex-row justify-left items-center h-full w-full">
+                <img src="https://oogovalzsivvyrtsnesm.supabase.co/storage/v1/object/public/imagens/Elementos/Logo.png" alt="Logo" className='flex mt-5 h-80'/>
+                <h2 className='flex w-full text-white text-md lg:text-lg mt-8 mr-4 font-bold h-full justify-end items-center'>JOGOS INTERNOS DO INSTITUTO DE INFORMÁTICA DA UFG</h2>
             </section>
             <div className="flex w-full h-[40px] bg-jiinf-secondary justify-center items-center">
                 <div className="flex w-3/4 flex-row h-full items-center justify-between">

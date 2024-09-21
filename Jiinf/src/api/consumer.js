@@ -129,6 +129,25 @@ export class Fetch {
         }
     }
 
+    
+    async GetResultados() {
+        try {
+            const response = fetch(this.BASEURL + "/api/v1/resultado/" , {
+                method: "GET",
+            })
+
+            if(!response) {
+                const errorResponse = await response.json(); 
+                throw new Error(errorResponse.error || "Erro desconhecido");
+            }
+
+            return (await response).json()
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
     async GetHome() {
         try {
             const response = fetch(this.BASEURL + "/api/v1/hub/" , {
