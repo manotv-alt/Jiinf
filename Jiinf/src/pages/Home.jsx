@@ -44,7 +44,7 @@ export function Home() {
 
     <div className="relative flex flex-col justify-center items-center min-h-screen min-w-screen rounded-lg bg-white mx-8 mt-8">
       <img 
-        src={hub[0].url_background} 
+        src={hub[0]?.url_background} 
         alt="bg-home"
         className="flex min-h-screen min-w-screen rounded-lg"
       />
