@@ -50,7 +50,7 @@ export function Home() {
         className="flex min-h-screen min-w-screen rounded-lg"
       />
   
-  <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full bg-jiinf-primary bg-opacity-50 rounded-r-lg rounded-l-lg ">
+  <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full bg-jiinf-primary bg-opacity-75 rounded-r-lg rounded-l-lg ">
   <h2 className="text-white text-3xl font-bold lg:text-4xl flex mt-4 justify-center">Classificação Geral</h2>
 
   <div className="flex justify-between w-full mt-12">

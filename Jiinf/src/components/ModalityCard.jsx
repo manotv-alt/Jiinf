@@ -22,7 +22,7 @@ export function ModalityCard({ name, description, imgSrc }) {
 
   return (
     <div
-      className="relative aspect-[10/14] w-72 overflow-hidden bg-jiinf-lightskin border-jiinf-primary border-4 rounded-lg"
+      className="relative aspect-[9/13] w-80 overflow-hidden bg-jiinf-lightskin border-jiinf-primary border-4 rounded-lg"
       style={{
         backgroundSize: 'cover',
         backgroundPosition: 'center',
