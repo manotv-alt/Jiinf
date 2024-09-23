@@ -1,4 +1,3 @@
-import { ModalityCard } from "../components/ModalityCard";
 import goldmedal from "../assets/gold-medal.png"
 import silvermedal from "../assets/silver-medal.png"
 import bronzemedal from "../assets/bronze-medal.png"

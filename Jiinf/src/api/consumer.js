@@ -20,24 +20,6 @@ export class Fetch {
         }
     }
 
-    async GetTimes() {
-        try {
-            const response = fetch(this.BASEURL + "/api/v1/times/", {
-                method: "GET",
-            })
-
-            if(!response) {
-                const errorResponse = await response.json(); 
-                throw new Error(errorResponse.error || "Erro desconhecido");
-            }
-
-            return (await response).json()
-        } catch (e) {
-            console.log(e)
-            throw e
-        }
-    }
-
     async GetTotalPoints(id) {
         try {
             const response = fetch(this.BASEURL + "/api/v1/times/total/" + id + "/" , {

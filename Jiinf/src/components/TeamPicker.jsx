@@ -12,8 +12,8 @@ const TeamPicker = ({ onChange }) => {
     async function setSearch () {
         try {
         const url = new Fetch ("https://jiinf.vercel.app");
-        const ax = await url.GetTimes();
-        setTeamsData(ax);
+        const ax = await url.GetEquipes();
+        setTeamsData(ax.equipes);
 
         } catch(error) {
             console.log(error);
