@@ -79,8 +79,8 @@ export function Modalitys() {
 
   return (
     <div className="flex flex-col justify-center items-center h-full w-full pt-8">
-      <h1 className="font-semibold text-6xl md:text-6xl text-jiinf-titles pb-10">
-        2° Edição JIINF 
+      <h1 className="font-SuperDario text-6xl md:text-8xl text-jiinf-titles pb-10">
+        II EDIÇÃO JIINF 
       </h1>
       <div className="w-full px-8 sm:px-12 md:px-12 lg:px-16">
         {loading ? (

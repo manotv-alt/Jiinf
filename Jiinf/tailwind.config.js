@@ -18,7 +18,9 @@ export default {
       },
 
       fontFamily: {
-        pixel: ['"Pixelify Sans"', 'sans-serif'],      },
+        pixel: ['"Pixelify Sans"', 'sans-serif'],      
+        SuperDario: ['SuperDario', 'sans-serif'],
+      },
     },
   },
   plugins: [],

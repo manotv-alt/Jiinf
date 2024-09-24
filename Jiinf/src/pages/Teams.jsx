@@ -29,7 +29,7 @@ export function Teams() {
 
   return (
     <div className="pt-8 flex flex-col w-full items-center justify-center">
-      <h1 className="font-semibold text-6xl md:text-6xl text-jiinf-titles pb-10">Participantes</h1>
+      <h1 className="font-SuperDario text-6xl md:text-8xl text-jiinf-titles pb-10">PARTICIPANTES</h1>
 
       <div className="w-full px-8 sm:px-12 md:px-12 lg:px-16">
         {loading ? (

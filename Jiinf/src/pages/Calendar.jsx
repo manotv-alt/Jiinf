@@ -4,6 +4,7 @@ import GameCard from "../components/GameCard";
 import TeamPicker from "../components/TeamPicker";
 import DataContext from "../contexts/DataContext";
 import { Fetch } from "../api/consumer";
+import GameCardNone from "../components/GameCardNone";
 
 export function Calendar() {
 
@@ -11,6 +12,7 @@ export function Calendar() {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("");
   const [gameData, setGameData] = useState([]);
+  const [gameDataNone, setGameDataNone] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export function Calendar() {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
 
-      <div className="flex px-4 flex-col sm:flex-row w-full items-center justify-center gap-8 sm:gap-24 p-20">
+      <div className="flex px-4 flex-col my-8 sm:flex-row md:my-16 w-full items-center justify-center gap-6 md:gap-8">
         <DatePicker onChange={setSelectedDate} />
         <TeamPicker onChange={setSelectedTeam} />
       </div>
@@ -56,6 +58,7 @@ export function Calendar() {
         </div>
       ) : (
         <div className="flex flex-col w-full gap-8">
+          <GameCardNone game={gameData[0]}/>
           {filteredGames.length > 0 ? (
             filteredGames.map((game, index) => (
               <GameCard key={index} game={game} />

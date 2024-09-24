@@ -11,3 +11,11 @@
 .slick-track {
     display: flex; /* Garantir que os itens estejam em linha */
 }
+
+@font-face {
+    font-family: 'SuperDario';
+    src: url('/src/assets/fonts/SuperDario.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+  
