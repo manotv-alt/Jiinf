@@ -1,35 +1,54 @@
-import goldmedal from "../assets/gold-medal.png"
-import silvermedal from "../assets/silver-medal.png"
-import bronzemedal from "../assets/bronze-medal.png"
+import goldmedal from "../assets/medals/gold-medal.png"
+import silvermedal from "../assets/medals/silver-medal.png"
+import bronzemedal from "../assets/medals/bronze-medal.png"
+import mediumback from "../assets/backgrounds/mediumback.png"
+import mobileback from "../assets/backgrounds/mobileback.png"
+import largeback from "../assets/backgrounds/largeback.png"
 import { useEffect, useState } from "react";
 import { Fetch } from "../api/consumer";
 
 export function Home() {
 
   const [teams, setTeams] = useState([]);
-  const [hub, setHub] = useState([]);
+  const [background, setBackground] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect (() => {
+
+    window.addEventListener('resize', resposiveBack); // Adiciona o evento de resize
 
     async function bla () {
         try {
         const url = new Fetch ("https://jiinf.vercel.app");
         const ax = await url.GetResultados();
-        const ax2 = await url.GetHome();
         setTeams(ax.times);
-        setHub(ax2);
 
         } catch(error) {
             console.log(error);
         } finally {
           setLoading(false);
+          resposiveBack();
         }
         
     }
 
     bla();
+
+    return () => {
+      window.removeEventListener('resize', resposiveBack); // Limpa o evento ao desmontar
+    };
+
   }, [])
+
+  const resposiveBack = () => {
+    if (window.innerWidth >= 1024) {
+      setBackground(largeback); // Para telas grandes
+    } else if (window.innerWidth >= 640) {
+      setBackground(mediumback); // Para telas médias
+    } else {
+      setBackground(mobileback); // Para telas pequenas
+    }
+  };
 
   const sortedTeams = teams.sort((a, b) => b.total_pontos - a.total_pontos);
 
@@ -42,37 +61,37 @@ export function Home() {
           </div>
         ) : (
 
-    <div className="relative flex flex-col justify-center items-center min-h-screen min-w-screen rounded-lg bg-white mx-8 mt-8">
+    <div className="relative flex flex-col justify-center items-center min-h-screen min-w-screen rounded-lg bg-white mx-4 md:mx-8 mt-8">
       <img 
-        src={hub[0]?.url_background} 
+        src={background} 
         alt="bg-home"
         className="flex min-h-screen min-w-screen rounded-lg"
       />
   
   <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full bg-jiinf-primary bg-opacity-75 rounded-r-lg rounded-l-lg ">
-  <h2 className="text-white text-5xl font-SuperDario lg:text-6xl flex mt-4 justify-center">CLASSIFICAÇÃO GERAL</h2>
+  <h2 className="text-white text-4xl md:text-5xl font-SuperDario lg:text-6xl flex mt-4 justify-center">CLASSIFICAÇÃO GERAL</h2>
 
   <div className="flex justify-between w-full mt-12">
     <div className="flex flex-row justify-between w-full items-center">
-      <h2 className="flex font-SuperDario text-4xl ml-4 mr-16 lg:mr-28 text-white justify-start">EQUIPES</h2>
+      <h2 className="flex font-SuperDario text-2xl md:text-4xl ml-4 mr-16 lg:mr-28 text-white justify-start">EQUIPES</h2>
 
-      <div className="flex w-full flex-row justify-end gap-3 lg:gap-6 mr-3 lg:mr-11">
+      <div className="flex w-full flex-row justify-end gap-4 lg:gap-5 mr-3 lg:mr-6">
         {/* Ícones e quantidade de medalhas */}
         <div className="flex flex-col items-center">
-          <img src={goldmedal} alt="goldmedal" className="w-7 h-7"/>
+          <img src={goldmedal} alt="goldmedal" className="w-6 h-6 md:w-9 md:h-9"/>
           <h3 className="text-white text-sm lg:text-base">{teams.pontuacao_total}</h3>
         </div>
         <div className="flex flex-col items-center">
-          <img src={silvermedal} alt="silvermedal" className="w-7 h-7"/>
+          <img src={silvermedal} alt="silvermedal" className="w-6 h-6 md:w-9 md:h-9"/>
           <h3 className="text-white text-sm lg:text-base">{teams.pontuacao_total}</h3>
         </div>
         <div className="flex flex-col items-center">
-          <img src={bronzemedal} alt="bronzemedal" className="w-7 h-7"/>
+          <img src={bronzemedal} alt="bronzemedal" className="w-6 h-6 md:w-9 md:h-9"/>
           <h3 className="text-white text-sm lg:text-base">{teams.pontuacao_total}</h3>
         </div>
       </div>
 
-      <h2 className="font-SuperDario text-4xl text-white mr-3 lg:mr-4">Pontos</h2>
+      <h2 className="font-SuperDario text-2xl md:text-4xl text-white mr-3 lg:mr-4">Pontos</h2>
     </div>
   </div>
 
@@ -80,26 +99,26 @@ export function Home() {
   <div className="flex flex-col w-full mt-8">
     {sortedTeams.map((team, index) => (
       <div key={team.id} className="flex flex-row justify-between items-center mx-4 mb-4 border-b border-white pb-4">
-        <h3 className="text-white font-SuperDario text-4xl">{index + 1}</h3>
-        <div className="flex lg:flex-row pl-4 h-full justify-init items-center">
-        <img src={team.url_image} alt={`${team.nome}-logo`} className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16"/>
-        <h3 className="text-white font-SuperDario text-2xl flex-grow ml-3">{team.nome}</h3>
+        <h3 className="text-white font-SuperDario text-3xl md:text-4xl">{index + 1}</h3>
+        <div className="flex flex-col min-w-[100px] md:w-full md:flex-row pl-5 h-full justify-center md:justify-start items-center">
+          <img src={team.url_image} alt={`${team.nome}-logo`} className="flex min-w-12 h-12 lg:w-16 lg:h-16"/>
+          <h3 className="text-white font-SuperDario text-md md:text-2xl md:ml-3">{team.nome.toUpperCase()}</h3>
         </div>
         
 
-        <div className="flex w-full flex-row items-center justify-end gap-8 lg:gap-10 mr-10 lg:mr-20">
+        <div className="flex w-full flex-row items-center justify-end gap-8 mr-11 md:gap-8 lg:gap-12 lg:mr-16">
           <div className="text-center">
-            <h3 className="text-white font-SuperDario text-4xl">{team.total_medalhas.OURO}</h3>
+            <h3 className="text-white font-SuperDario text-2xl md:text-3xl">{team.total_medalhas.OURO}</h3>
           </div>
           <div className="text-center">
-            <h3 className="text-white font-SuperDario text-4xl">{team.total_medalhas.PRATA}</h3>
+            <h3 className="text-white font-SuperDario text-2xl md:text-3xl">{team.total_medalhas.PRATA}</h3>
           </div>
           <div className="text-center">
-            <h3 className="text-white font-SuperDario text-4xl">{team.total_medalhas.BRONZE}</h3>
+            <h3 className="text-white font-SuperDario text-2xl md:text-3xl">{team.total_medalhas.BRONZE}</h3>
           </div>
         </div>
 
-        <h3 className="text-white mr-8 ml-2 font-SuperDario text-4xl">{team.total_pontos}</h3>
+        <h3 className="text-white mr-5 md:mr-8 md:ml-2 font-SuperDario text-2xl md:text-4xl">{team.total_pontos}</h3>
       </div>
     ))}
   </div>

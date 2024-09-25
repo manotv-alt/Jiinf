@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import hand from '../assets/handball.png';
 
 const GameCard = ({ game }) => {
 

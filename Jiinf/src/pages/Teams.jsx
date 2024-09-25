@@ -31,7 +31,7 @@ export function Teams() {
     <div className="pt-8 flex flex-col w-full items-center justify-center">
       <h1 className="font-SuperDario text-6xl md:text-8xl text-jiinf-titles pb-10">PARTICIPANTES</h1>
 
-      <div className="w-full px-8 sm:px-12 md:px-12 lg:px-16">
+      <div className="w-full md:px-12 lg:px-16">
         {loading ? (
           <div className="flex mt-16 justify-center items-center">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-jiinf-primary"></div>

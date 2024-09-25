@@ -58,7 +58,10 @@ export function Calendar() {
         </div>
       ) : (
         <div className="flex flex-col w-full gap-8">
-          <GameCardNone game={gameData[0]}/>
+
+
+          {/*<GameCardNone game={gameData[0]}/>*/}
+
           {filteredGames.length > 0 ? (
             filteredGames.map((game, index) => (
               <GameCard key={index} game={game} />

@@ -43,7 +43,7 @@ export function ModalityCard({ name, description, imgSrc }) {
         <div className="flex h-full justify-center mt-4 mb-4">
           <img src={imgSrc} alt="Ícone do Esporte" className="w-36 h-36 rounded-full border-2 border-black" />
         </div>
-        <h3 className="text-4xl font-pixel pb-4 mb-2 text-center">{name}</h3>
+        <h3 className="text-5xl font-SuperDario pb-4 mb-2 text-center">{name.toUpperCase()}</h3>
         <p className="text-lg pb-4 mb-4 font-semibold text-center">
           {description}
         </p>

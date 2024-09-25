@@ -69,7 +69,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
       }}
     >
       <div className="p-4">
-        <h2 className="text-3xl font-pixel mb-2 text-center pb-4">{title}</h2>
+        <h2 className="text-4xl font-SuperDario mb-2 text-center pb-4">{title.toUpperCase()}</h2>
         <div className="flex justify-center pb-4">
           <img
             className="rounded-full ring-2 ring-white h-36 w-36"
