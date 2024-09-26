@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.jsx'
 import './index.css'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { Home } from './pages/Home.jsx';
 import { Teams } from './pages/Teams.jsx';
 import { Calendar } from './pages/Calendar.jsx';

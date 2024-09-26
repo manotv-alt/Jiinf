@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { usePath } from '../hooks/usePath';
+import { Github, Instagram, Linkedin } from 'lucide-react';
 
-export function Header() {
-    const [currentPage, setCurrentPage] = useState();
+const Header = () => {
     const { isCurrentPage } = usePath();
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar a abertura do menu
 
@@ -91,3 +91,48 @@ export function Header() {
         </header>
     );
 }
+
+const Footer = () => {
+    return (
+        <footer className=" bg-jiinf-primary text-white py-4 mt-auto">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col  items-center md:flex-row md:justify-between">
+              <div className="text-center md:text-left mb-4 md:mb-0">
+                <div className='flex flex-row gap-3 items-center justify-center'>
+                    <p className="text-lg font-semibold">Unificada</p>
+                    <a 
+                    href="https://www.instagram.com/unificadaufg/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        <Instagram className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                    </a>
+                </div>
+                <p className="text-sm mt-2">© 2024 Unificada. Todos os direitos reservados.</p>              
+              </div>
+              <div className='flex flex-row gap-2 items-center justify-center'>
+                <p className="text-sm">Developed by</p>
+                
+                <a 
+                href="https://github.com/manotv-alt" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className='flex flex-row gap-2 hover:text-jiinf-secondary'>
+                    <p className='text-sm cursor-pointer'>manotv-alt</p>
+                    <Github className='h-5 w-5 cursor-pointer'/>
+                </a>
+
+                <a 
+                href="https://www.linkedin.com/in/emmanuel-fernandes-a04646289/"
+                target="_blank"
+                rel="noopener noreferrer">
+                    <Linkedin className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </footer>
+    );
+};
+
+export { Footer, Header };

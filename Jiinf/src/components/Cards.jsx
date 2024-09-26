@@ -1,5 +1,60 @@
 import { useState, useEffect } from 'react';
 
+const ModalityCard = ({ name, description, imgSrc }) => {
+
+  const [hovered, setHovered] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  console.log(imgSrc);
+
+  const handleMouseEnter = () => setHovered(true);
+  const handleMouseLeave = () => {
+    setHovered(false);
+    setMousePosition({ x: 0, y: 0 });
+  };
+
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width - 0.5) * 40;
+    const y = ((e.clientY - top) / height - 0.5) * 40;
+    setMousePosition({ x, y });
+  };
+
+  return (
+    <div
+      className="relative aspect-[9/13] w-80 overflow-hidden bg-jiinf-lightskin border-jiinf-primary border-4 rounded-lg"
+      style={{
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        transform: `rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)`,
+        transition: 'transform 0.05s ease-in-out',
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+    >
+      <div
+        className="absolute flex flex-col justify-start p-4 text-jiinf-labels bg-opacity-50 rounded-lg"
+        style={{
+          transform: hovered ? `rotateX(${mousePosition.y}deg) rotateY(${mousePosition.x}deg)` : 'none',
+          transition: 'transform 0.05s ease-in-out',
+        }}
+      >
+        <div className='flex flex-col h-full justify-center gap-4 items-center'>
+          <div className="flex justify-center">
+            <img src={imgSrc} alt="Ícone do Esporte" className="w-36 h-36 rounded-full border-2 border-black" />
+          </div>
+          <h3 className="text-5xl font-SuperDario text-center">{name.toUpperCase()}</h3>          
+        </div>
+
+        <p className="text-lg mt-8 font-semibold text-center">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 const TeamCard = ({ title, description, imageSrc }) => {
   
   const [isAnimating, setIsAnimating] = useState(false);
@@ -83,4 +138,4 @@ const TeamCard = ({ title, description, imageSrc }) => {
   );
 };
 
-export default TeamCard;
+export { ModalityCard, TeamCard };

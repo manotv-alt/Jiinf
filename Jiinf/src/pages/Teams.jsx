@@ -1,31 +1,8 @@
-import { useEffect, useState } from "react";
-import TeamCard from "../components/TeamCard";
-import { Fetch } from "../api/consumer";
+import { TeamCard }from "../components/Cards";
+import useApi from "../hooks/useApi";
 
 export function Teams() {
-  const [teamsData, setTeamsData] = useState(null); // inicializa com 'null'
-  const [teams, setTeams] = useState([]); // inicializa como array vazio
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchTeams() {
-      try {
-        const url = new Fetch("https://jiinf.vercel.app");
-        const data = await url.GetEquipes();
-        setTeamsData(data);
-        if (data && data.equipes) {
-          setTeams(data.equipes); // Atualiza o estado 'teams' diretamente quando 'teamsData' for obtido
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false); // Remove o loading após tentar carregar os dados
-      }
-    }
-
-    fetchTeams(); // Chama a função de fetch
-  }, []); // Executa o efeito apenas uma vez no carregamento inicial
-
+  const { teams, loading } = useApi();
 
   return (
     <div className="pt-8 flex flex-col w-full items-center justify-center">
