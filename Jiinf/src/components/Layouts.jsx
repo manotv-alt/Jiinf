@@ -5,7 +5,7 @@ import { Github, Instagram, Linkedin } from 'lucide-react';
 
 const Header = () => {
     const { isCurrentPage } = usePath();
-    const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar a abertura do menu
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const current = 'flex w-full justify-center font-SuperDario my-1 text-2xl lg:text-3xl text-jiinf-primary transition-all hover:text-jiinf-primary';
     const general = 'flex w-full justify-center font-SuperDario my-1 text-2xl lg:text-3xl text-white transition-all hover:text-jiinf-primary';
@@ -20,11 +20,10 @@ const Header = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Adicione um useEffect para monitorar o redimensionamento da janela
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth >= 768) { // 768px é o breakpoint para md
-                setIsMenuOpen(false); // Fecha o menu ao aumentar a tela
+            if (window.innerWidth >= 768) {
+                setIsMenuOpen(false);
             }
         };
 
@@ -41,7 +40,9 @@ const Header = () => {
 
             {/* Top part of header */}
             <section className="flex flex-row justify-center md:justify-left items-center h-full w-full">
-                <img src="https://oogovalzsivvyrtsnesm.supabase.co/storage/v1/object/public/imagens/Elementos/Logo.png" alt="Logo" className={`flex ${isMenuOpen ? 'mt-48' : 'mt-6'} md:mt-4 h-80`}/>
+                <NavLink to={"/"} className="flex min-w-fit">
+                    <img src="https://oogovalzsivvyrtsnesm.supabase.co/storage/v1/object/public/imagens/Elementos/Logo.png" alt="Logo" className={`flex ${isMenuOpen ? 'mt-48' : 'mt-6'} md:mt-4 h-80`}/>
+                </NavLink>
                 <h2 className='hidden md:flex w-full text-white text-md md:text-xl lg:text-2xl mt-8 mr-4 font-SuperDario h-full justify-end items-center'>JOGOS INTERNOS DO INSTITUTO DE INFORMÁTICA DA UFG</h2>
             </section>
 
@@ -107,28 +108,53 @@ const Footer = () => {
                         <Instagram className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
                     </a>
                 </div>
-                <p className="text-sm mt-2">© 2024 Unificada. Todos os direitos reservados.</p>              
+                <p className="text-sm mt-2">© 2024 Unificada. All rights reserved.</p>              
               </div>
-              <div className='flex flex-row gap-2 items-center justify-center'>
-                <p className="text-sm">Developed by</p>
-                
-                <a 
-                href="https://github.com/manotv-alt" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className='flex flex-row gap-2 hover:text-jiinf-secondary'>
-                    <p className='text-sm cursor-pointer'>manotv-alt</p>
-                    <Github className='h-5 w-5 cursor-pointer'/>
-                </a>
 
-                <a 
-                href="https://www.linkedin.com/in/emmanuel-fernandes-a04646289/"
-                target="_blank"
-                rel="noopener noreferrer">
-                    <Linkedin className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
-                </a>
+              <div className='flex flex-col gap-3'>
+                <div className='flex flex-row gap-2 items-center justify-center'>
+                    <p className="text-sm">Developed by</p>
+                    
+                    <a 
+                    href="https://github.com/manotv-alt" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className='flex flex-row gap-2 hover:text-jiinf-secondary'>
+                        <p className='text-sm cursor-pointer'>manotv-alt</p>
+                        <Github className='h-5 w-5 cursor-pointer'/>
+                    </a>
 
+                    <a 
+                    href="https://www.linkedin.com/in/emmanuel-fernandes-a04646289/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        <Linkedin className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                    </a>
+
+                </div>
+
+                <div className='flex flex-row gap-2 items-center justify-center'>
+                    <p className="text-sm">and</p>
+                    
+                    <a 
+                    href="https://github.com/LuisFcarmo" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className='flex flex-row gap-2 hover:text-jiinf-secondary'>
+                        <p className='text-sm cursor-pointer'>LuisFcarmo</p>
+                        <Github className='h-5 w-5 cursor-pointer'/>
+                    </a>
+
+                    <a 
+                    href="https://www.linkedin.com/in/luis-cesar-ferreira-do-carmo/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                        <Linkedin className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                    </a>
+
+                </div>
               </div>
+              
             </div>
           </div>
         </footer>

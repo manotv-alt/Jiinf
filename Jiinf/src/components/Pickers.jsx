@@ -28,7 +28,7 @@ const DatePicker = ({ onChange }) => {
       <select
         value={selectedDate}
         onChange={handleDateChange}
-        className="border border-jiinf-primary text-jiinf-primary rounded-lg px-10 py-2 pr-10 bg-white appearance-none"
+        className="border border-jiinf-primary text-jiinf-primary rounded-lg px-10 py-2 bg-white appearance-none"
       >
         <option value="">Todas as Datas</option>
         {dates.map((date) => (
@@ -62,16 +62,20 @@ const TeamPicker = ({ onChange }) => {
         onChange={handleTeamChange}
         className="border border-jiinf-primary text-jiinf-primary rounded-lg px-10 py-2 pr-10 bg-white appearance-none"
       >
-        <option value="" >Todas as Equipes</option>
-        {teams.map((Team) => (
-          <option key={Team.nome} value={Team.nome}>
-            {Team.nome}
-          </option>
-        ))}
+        <option value="">Todas as Equipes</option>
+        {Array.isArray(teams) && teams.length > 0 ? (
+          teams.map((Team) => (
+            <option key={Team.nome} value={Team.nome}>
+              {Team.nome}
+            </option>
+          ))
+        ) : (
+          <option value="" disabled>Carregando equipes...</option>
+        )}
       </select>
       <ShieldHalf className="absolute top-1/2 left-3 transform -translate-y-1/2 h-5 w-5 text-jiinf-primary pointer-events-none" />
     </div>
-  );
+  );  
 };
 
 export { DatePicker, TeamPicker };

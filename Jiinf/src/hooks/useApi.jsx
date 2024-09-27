@@ -6,19 +6,22 @@ import mobileback from "../assets/backgrounds/mobileback.png"
 
 const useApi = () => {
 
-    const [teamsData, setTeamsData] = useState(null);
     const [teams, setTeams] = useState([]);
     const [modalitys, setModalitys] = useState([]);
     const [gameData, setGameData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loadingHome, setLoadingHome] = useState(true);
+    const [loadingTeams, setLoadingTeams] = useState(true);
+    const [loadingCalendar, setLoadingCalendar] = useState(true);
+    const [loadingModalitys, setLoadingModalitys] = useState(true);
     const [error, setError] = useState(null);
     const [background, setBackground] = useState(null);
     const [results, setResults] = useState([]);
     const [home, setHome] = useState();
+    const urlApi = import.meta.env.VITE_API_URL;
   
     const resposiveBack = () => {
       if (window.innerWidth >= 1024) {
-        setBackground(largeback); // Para telas grandes
+        setBackground(mediumback); // Para telas grandes
       } else if (window.innerWidth >= 640) {
         setBackground(mediumback); // Para telas médias
       } else {
@@ -29,14 +32,14 @@ const useApi = () => {
     useEffect(() => {
       const fetchTeams = async () => {
         try {
-          const url = new Fetch("https://jiinf.vercel.app");
+          const url = new Fetch(urlApi);
+          setLoadingTeams(true);
           const data = await url.GetEquipes();
           setTeams(data.equipes);
         } catch (err) {
-          setError(err);
           console.log(err);
         } finally {
-          setLoading(false);
+          setLoadingTeams(false);
         }
       };
   
@@ -46,14 +49,14 @@ const useApi = () => {
     useEffect(() => {
       const fetchModalities = async () => {
         try {
-          const url = new Fetch("https://jiinf.vercel.app");
-          const ax = await url.GetModalidades();
+          const url = new Fetch(urlApi);
+          setLoadingModalitys(true);
+          const ax = await url.GetModalidades(urlApi);
           setModalitys(ax);
         } catch (err) {
-          setError(err);
-          console.log(err);
+          console.log(err)
         } finally {
-          setLoading((prevLoading) => prevLoading && false);
+          setLoadingModalitys(false);
         }
       };
   
@@ -63,13 +66,14 @@ const useApi = () => {
     useEffect(() => {
       const fetchResultados = async () => {
         try {
-          const url = new Fetch("https://jiinf.vercel.app");
+          const url = new Fetch(urlApi);
+          setLoadingHome(true);
           const ax = await url.GetResultados();
           setResults(ax.times);
         } catch (err) {
           console.log(err);
         } finally {
-          setLoading(false);
+          setLoadingHome(false);
           resposiveBack();
         }
       };
@@ -87,15 +91,14 @@ const useApi = () => {
     useEffect(() => {
       const fetchEventos = async () => {
         try {
-          const url = new Fetch("https://jiinf.vercel.app");
+          const url = new Fetch(urlApi);
+          setLoadingCalendar(true);
           const ax = await url.GetEventos();
           setGameData(ax);
-          setLoading(true);
         } catch (err) {
           console.log(err);
-          setLoading(true);
         } finally {
-          setLoading(false);
+          setLoadingCalendar(false);
         }
       };
   
@@ -105,23 +108,21 @@ const useApi = () => {
     useEffect(() => {
       const fetchHome = async () => {
         try {
-          const url = new Fetch("https://jiinf.vercel.app");
+          const url = new Fetch(urlApi);
+          setLoadingHome(true);
           const ax = await url.GetHome();
           setHome(ax[0].texto);
-          console.log(home);
-          setLoading(true);
         } catch (err) {
           console.log(err);
-          setLoading(true);
         } finally {
-          setLoading(false);
+          setLoadingHome(false);
         }
       };
   
       fetchHome();
     }, []);
 
-    return { home, teamsData, teams, results, modalitys, gameData, loading, error, background };
+    return { home, teams, results, modalitys, gameData, loadingHome, loadingCalendar, loadingModalitys, loadingTeams, error, background };
 };
 
 export default useApi;
