@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ModalityCard } from './Cards';
 
-const Carousel = ({ modalitys, slidesToShow }) => {
+const Slider = ({ modalitys, slidesToShow }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const totalCards = modalitys.length;
@@ -26,7 +26,7 @@ const Carousel = ({ modalitys, slidesToShow }) => {
   );
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center overflow-hidden">
+    <div className="relative w-full min-h-fit flex flex-col items-center overflow-hidden">
       {/* Botão para o slide anterior */}
       <button
         onClick={prevSlide}
@@ -37,7 +37,7 @@ const Carousel = ({ modalitys, slidesToShow }) => {
       </button>
 
       {/* Container dos slides */}
-      <div className="flex justify-center items-center gap-6 transition-transform duration-500 ease-in-out w-full px-6">
+      <div className="flex justify-center h-[480px] items-center gap-6 transition-transform duration-500 ease-in-out w-full px-6">
         {visibleCards.map((sport, index) => (
           <div
             key={index}
@@ -75,4 +75,4 @@ const Carousel = ({ modalitys, slidesToShow }) => {
   );
 };
 
-export default Carousel;
+export default Slider;

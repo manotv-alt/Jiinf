@@ -34,7 +34,7 @@ export function Home() {
           />
 
           <div className="hidden lg:flex h-full items-center ml-24 absolute">
-            <h2 className="flex text-white text-xl font-semibold w-1/2 text-justify">{home ? home : ' '}</h2>
+            <h2 className="flex text-white text-2xl font-semibold w-1/2 text-justify">{home ? home : ' '}</h2>
           </div>
 
           <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full bg-jiinf-primary bg-opacity-75 lg:bg-opacity-100 rounded-lg lg:rounded-r-lg lg:rounded-l-none md:rounded-r-lg ">
@@ -57,7 +57,7 @@ export function Home() {
                   </div>
                 </div>
 
-                <h2 className="font-SuperDario text-2xl md:text-4xl text-white mr-3 lg:mr-4">Pontos</h2>
+                <h2 className="font-SuperDario text-2xl md:text-4xl md:min-w-[83.17px] text-white mr-3 lg:mr-4">PONTOS</h2>
               </div>
             </div>
 

@@ -39,7 +39,9 @@ const useApi = () => {
         } catch (err) {
           console.log(err);
         } finally {
-          setLoadingTeams(false);
+          setTimeout(() => {
+            setLoadingTeams(false);
+          }, 1000);
         }
       };
   
@@ -56,7 +58,10 @@ const useApi = () => {
         } catch (err) {
           console.log(err)
         } finally {
-          setLoadingModalitys(false);
+          setTimeout(() => {
+            setLoadingModalitys(false);
+          }, 1000);
+          
         }
       };
   
@@ -73,8 +78,10 @@ const useApi = () => {
         } catch (err) {
           console.log(err);
         } finally {
-          setLoadingHome(false);
-          resposiveBack();
+          setTimeout(() => {
+            setLoadingHome(false);
+            resposiveBack();
+          }, 1000);
         }
       };
   
@@ -98,7 +105,9 @@ const useApi = () => {
         } catch (err) {
           console.log(err);
         } finally {
-          setLoadingCalendar(false);
+          setTimeout(() => {
+            setLoadingCalendar(false);            
+          }, 1000);
         }
       };
   
@@ -115,7 +124,9 @@ const useApi = () => {
         } catch (err) {
           console.log(err);
         } finally {
-          setLoadingHome(false);
+          setTimeout(() => {
+            setLoadingHome(false);            
+          }, 1000);
         }
       };
   

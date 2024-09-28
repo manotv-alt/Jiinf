@@ -1,4 +1,5 @@
 import useApi from "../hooks/useApi";
+import { MapPinned, Clock } from 'lucide-react';
 
 const GameCard = ({ game }) => {
 
@@ -29,21 +30,21 @@ const GameCard = ({ game }) => {
         <div className="md:hidden w-full border-b-[1.5px] border-jiinf-primary"></div>
         <div className="hidden md:block border-l-[2px] border-jiinf-primary h-32 ml-4 mr-16"></div>
   
-        <div className="flex flex-row w-full items-center justify-center mt-4">
+        <div className="flex flex-row w-full items-center justify-between mt-4">
 
-          <div className="flex flex-col ml-4 min-w-[79px] md:ml-0 justify-center items-center text-center">
+          <div className="flex flex-col md:min-w-[80px] text-center justify-center items-center">
             <img src={game.TimeA.url_image} alt="Logo do Time A" className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" />
             <p className="hidden sm:flex text-md md:text-lg font-semibold text-jiinf-primary">{game.TimeA.nome}</p>
           </div>
   
           {/* Seção do placar */}
-          <div className='flex flex-row w-full justify-center items-center md:mx-3 lg:mx-10'>
-            <p className="text-2xl text-center min-w-[42px] md:text-4xl font-bold text-jiinf-primary">{game.placarA}</p>
-            <p className="text-2xl font-bold text-jiinf-primary mx-4 lg:mx-16">vs</p>
-            <p className="text-2xl text-center min-w-[42px] md:text-4xl font-bold text-jiinf-primary">{game.placarB}</p>
+          <div className='flex flex-row w-full justify-center gap-8 md:justify-between md:gap-0 md:mx-4 lg:mx-20 items-center'>
+            <p className="text-2xl text-center md:text-4xl font-bold text-jiinf-primary">{game.placarA}</p>
+            <p className="text-2xl font-bold text-jiinf-primary mx-2">vs</p>
+            <p className="text-2xl text-center md:text-4xl font-bold text-jiinf-primary">{game.placarB}</p>
           </div>
   
-          <div className="flex flex-col mr-4 min-w-[79px] md:mr-0 justify-center items-center text-center">
+          <div className="flex flex-col md:min-w-[80px] text-center items-center">
             <img src={game.TimeB.url_image || hand} alt="Logo do Time B" className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" />
             <p className="hidden sm:flex text-md md:text-lg font-semibold text-jiinf-primary">{game.TimeB.nome}</p>
           </div>
@@ -55,9 +56,21 @@ const GameCard = ({ game }) => {
         <div className="hidden md:block border-r-[2px] border-jiinf-primary h-32 ml-16 md:mr-4"></div>
   
         <div className="flex flex-col md:min-w-[100px] lg:min-w-[280px] mt-2 items-center justify-center text-center">
-          <div className="lg:text-lg md:text-sm text-jiinf-primary font-bold">{game.local}</div>
-          <div className="lg:text-lg md:text-sm text-jiinf-primary font-bold">{game.horario} horas</div>
-          <div className="lg:text-md md:text-sm text-jiinf-primary font-semibold">{dateLabel}</div>
+          
+          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
+            <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
+            {game.local}
+          </div>
+
+          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
+            <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
+            {game.horario}
+          </div>
+
+          <div className="lg:text-md md:text-sm text-jiinf-primary font-semibold">
+            {dateLabel}
+          </div>
+
           <div className={`px-8 text-center md:px-4 py-2 rounded-lg mt-2 ${game.status === 'Finalizado' ? 'bg-green-500' : 'bg-jiinf-primary'}`}>
             {game.status === 'Finalizado' ? 'Finalizado' : 'Não iniciado'}
           </div>
@@ -97,10 +110,10 @@ const GameCardNone = ({ game }) => {
         <div className="md:hidden w-full border-b-[1.5px] border-jiinf-primary"></div>
         <div className="hidden md:block border-l-[2px] border-jiinf-primary h-32 ml-4 mr-16"></div>
   
-        <div className="flex flex-row w-full gap-8 justify-center items-center md:justify-between mt-4">
+        <div className="flex flex-row w-full gap-8 md:gap-0 justify-center items-center md:justify-between mt-4">
 
         {teams.map((team, index) => (
-          <div key={index} className="flex flex-col md:w-[79px] text-center items-center"> {/* Div contêiner para os dois elementos */}
+          <div key={index} className="flex flex-col md:w-[76px] lg:w-[80px] text-center items-center"> {/* Div contêiner para os dois elementos */}
             <img 
               src={team.url_image} 
               alt="Logo time" 
@@ -119,8 +132,15 @@ const GameCardNone = ({ game }) => {
         <div className="hidden md:block border-r-[2px] border-jiinf-primary h-32 ml-16 md:mr-4"></div>
   
         <div className="flex flex-col md:min-w-[100px] lg:min-w-[280px] mt-2 items-center justify-center text-center">
-          <div className="lg:text-lg md:text-sm text-jiinf-primary font-bold">{game.local}</div>
-          <div className="lg:text-lg md:text-sm text-jiinf-primary font-bold">{game.horario} horas</div>
+          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
+            <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
+            {game.local}
+          </div>
+          
+          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
+            <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
+            {game.horario}
+          </div>
           <div className="lg:text-md md:text-sm text-jiinf-primary font-semibold">{dateLabel}</div>
           <div className={`px-8 text-center md:px-4 py-2 rounded-lg mt-2 ${game.status === 'Finalizado' ? 'bg-green-500' : 'bg-jiinf-primary'}`}>
             {game.status === 'Finalizado' ? 'Finalizado' : 'Não iniciado'}

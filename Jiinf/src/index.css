@@ -3,15 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.slick-slide {
-    display: flex;
-    justify-content: center; /* Centralizar os itens */
-}
-
-.slick-track {
-    display: flex; /* Garantir que os itens estejam em linha */
-}
-
 @font-face {
     font-family: 'SuperDario';
     src: url('/src/assets/fonts/SuperDario.woff2') format('woff2');

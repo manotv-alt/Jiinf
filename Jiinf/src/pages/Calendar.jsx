@@ -15,7 +15,7 @@ export function Calendar() {
     const checkFilteredGames = async () => {
       if (!loadingCalendar && gameData) {
         const filteredGames = gameData.filter((game) => {
-          const matchesTeam = selectedTeam ? game.TimeA.nome === selectedTeam || game.TimeB.nome === selectedTeam : true;
+          const matchesTeam = selectedTeam ? game.TimeA.nome === selectedTeam || game.TimeB.nome === selectedTeam || game.TimeA.nome === game.TimeB.nome : true;
           const matchesDate = selectedDate ? game.data.toString() === selectedDate : true;
           return matchesDate && matchesTeam;
         });

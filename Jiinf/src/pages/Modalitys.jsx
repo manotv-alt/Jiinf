@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Carousel from '../components/Carousel';
+import Slider from '../components/Slider';
 import { Loading } from '../components/Loading';
 import useApi from '../hooks/useApi';
 
@@ -36,7 +36,7 @@ export function Modalitys() {
     {loadingModalitys ? (
       <Loading />
     ) : (
-      <Carousel modalitys={modalitys} slidesToShow={slidesToShow}/>
+      <Slider modalitys={modalitys} slidesToShow={slidesToShow}/>
     )}
   </div>
 </div>
