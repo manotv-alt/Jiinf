@@ -2,7 +2,7 @@ export class Fetch {
     constructor (baseURL) {
         this.BASEURL = baseURL;
     }
-    async GetEventos() {
+    async GetCalendar() {
         try {
             const response = fetch(this.BASEURL + "/api/v1/eventos/", {
                 method: "GET",
@@ -20,7 +20,7 @@ export class Fetch {
         }
     }
 
-    async GetModalidades() {
+    async GetModalities() {
         try {
             const response = fetch(this.BASEURL + "/api/v1/modalidades/" , {
                 method: "GET",
@@ -38,7 +38,7 @@ export class Fetch {
         }
     }
 
-    async GetEquipes() {
+    async GetTeams() {
         try {
             const response = fetch(this.BASEURL + "/api/v1/equipes/" , {
                 method: "GET",
@@ -57,7 +57,7 @@ export class Fetch {
     }
 
     
-    async GetResultados() {
+    async GetResults() {
         try {
             const response = fetch(this.BASEURL + "/api/v1/resultado/" , {
                 method: "GET",

@@ -7,8 +7,6 @@ const Header = () => {
     const { isCurrentPage } = usePath();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const current = 'flex w-full justify-center font-SuperDario my-1 text-2xl lg:text-3xl text-jiinf-primary transition-all hover:text-jiinf-primary';
-    const general = 'flex w-full justify-center font-SuperDario my-1 text-2xl lg:text-3xl text-white transition-all hover:text-jiinf-primary';
     const navItems = [
         { to: '/', label: 'INÍCIO' },
         { to: '/teams', label: 'EQUIPES' },
@@ -29,7 +27,6 @@ const Header = () => {
 
         window.addEventListener('resize', handleResize);
 
-        // Limpeza do event listener
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -63,7 +60,9 @@ const Header = () => {
                         <ul className='flex flex-col w-full'>
                             {navItems.map((item, index) => (
                                 <li key={index} className="w-full text-center border-b-jiinf-primary border-b-[1px]">
-                                    <NavLink to={item.to} className={isCurrentPage(item.to) ? current : general}>
+                                    <NavLink to={item.to} 
+                                    className={`flex w-full justify-center font-SuperDario my-1 text-2xl lg:text-3xl transition-all hover:text-jiinf-primary
+                                    ${isCurrentPage(item.to) ? 'text-jiinf-primary' : 'text-white'}`}>
                                         {item.label}
                                     </NavLink>
                                 </li>
@@ -80,7 +79,8 @@ const Header = () => {
                         <ul className='flex flex-row w-full items-center justify-between text-lg'>
                             {navItems.map((item, index) => (
                                 <li key={index}>
-                                    <NavLink to={item.to} className={isCurrentPage(item.to) ? current : general}>
+                                    <NavLink to={item.to} className={`flex w-full justify-center font-SuperDario my-1 text-2xl lg:text-3xl transition-all hover:text-jiinf-primary
+                                    ${isCurrentPage(item.to) ? 'text-jiinf-primary' : 'text-white'}`}>
                                         {item.label}
                                     </NavLink>
                                 </li>

@@ -22,22 +22,28 @@ export function Home() {
   }, [loadingHome, results]);
 
   return (
-    <div className="w-full">
+    <div className="relative min-w-screen">
       {loadingHome ? (
         <Loading/>
       ) : (
-        <div className="relative flex flex-col justify-center lg:justify-start items-center lg:items-start min-h-screen min-w-screen rounded-lg bg-white mx-4 md:mx-8 mt-8">
-          <img 
-            src={background} 
-            alt="bg-home"
-            className="flex min-h-screen rounded-lg lg:w-3/5 lg:rounded-r-none lg:rounded-l-lg"
-          />
+        <div className="relative flex flex-col justify-center lg:justify-start items-center lg:items-start min-h-[900px] min-w-screen rounded-lg bg-white mx-4 md:mx-8 mt-8">
+          
+          <div className="absolute rounded-lg left-0 top-0 w-full lg:w-3/5 h-full bg-jiinf-primary lg:rounded-l-lg lg:rounded-r-none">
+            <img 
+              src={background} 
+              alt="bg-home"
+              className="flex h-full rounded-lg w-full lg:opacity-45 lg:rounded-r-none lg:rounded-l-lg"
+            />
 
-          <div className="hidden lg:flex h-full items-center ml-24 absolute">
-            <h2 className="flex text-white text-2xl font-semibold w-1/2 text-justify">{home ? home : ' '}</h2>
+            <div className="absolute top-0 flex items-center justify-center text-justify">
+              <h2 className="hidden lg:flex text-white text-md mx-20 mt-32 font-semibold text-justify">
+                {home ? home : ' '}
+              </h2>
+            </div>
+
           </div>
 
-          <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full bg-jiinf-primary bg-opacity-75 lg:bg-opacity-100 rounded-lg lg:rounded-r-lg lg:rounded-l-none md:rounded-r-lg ">
+          <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full lg:border-l-2 bg-jiinf-primary bg-opacity-75 lg:bg-opacity-100 rounded-lg lg:rounded-r-lg lg:rounded-l-none md:rounded-r-lg ">
             <h2 className="text-white text-4xl md:text-5xl font-SuperDario lg:text-6xl flex mt-4 justify-center">CLASSIFICAÇÃO GERAL</h2>
 
             <div className="flex justify-between w-full mt-12">
@@ -88,9 +94,7 @@ export function Home() {
                   </div>
                 ))
               ) : (
-                <div className="flex mt-16 justify-center items-center">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-jiinf-primary"></div>
-                </div>
+                <Loading/>
               )}
             </div>
           </div>

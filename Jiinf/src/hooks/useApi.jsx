@@ -1,40 +1,40 @@
 import { Fetch } from "../api/consumer";
 import { useEffect, useState } from "react";
-import largeback from "../assets/backgrounds/largeback.png"
 import mediumback from "../assets/backgrounds/mediumback.png"
 import mobileback from "../assets/backgrounds/mobileback.png"
 
 const useApi = () => {
 
     const [teams, setTeams] = useState([]);
-    const [modalitys, setModalitys] = useState([]);
+    const [modalities, setModalities] = useState([]);
     const [gameData, setGameData] = useState([]);
     const [loadingHome, setLoadingHome] = useState(true);
     const [loadingTeams, setLoadingTeams] = useState(true);
     const [loadingCalendar, setLoadingCalendar] = useState(true);
-    const [loadingModalitys, setLoadingModalitys] = useState(true);
-    const [error, setError] = useState(null);
+    const [loadingModalities, setLoadingModalities] = useState(true);
     const [background, setBackground] = useState(null);
     const [results, setResults] = useState([]);
     const [home, setHome] = useState();
     const urlApi = import.meta.env.VITE_API_URL;
   
+    {/*Responsivity background control*/}
     const resposiveBack = () => {
       if (window.innerWidth >= 1024) {
-        setBackground(mediumback); // Para telas grandes
+        setBackground(mediumback);
       } else if (window.innerWidth >= 640) {
-        setBackground(mediumback); // Para telas médias
+        setBackground(mediumback);
       } else {
-        setBackground(mobileback); // Para telas pequenas
+        setBackground(mobileback);
       }
     };
   
+    {/*Fetch infos to Teams Page*/}
     useEffect(() => {
       const fetchTeams = async () => {
         try {
           const url = new Fetch(urlApi);
           setLoadingTeams(true);
-          const data = await url.GetEquipes();
+          const data = await url.GetTeams();
           setTeams(data.equipes);
         } catch (err) {
           console.log(err);
@@ -48,18 +48,19 @@ const useApi = () => {
       fetchTeams();
     }, []);
   
+    {/*Fetch infos to Modalities Page*/}
     useEffect(() => {
       const fetchModalities = async () => {
         try {
           const url = new Fetch(urlApi);
-          setLoadingModalitys(true);
-          const ax = await url.GetModalidades(urlApi);
-          setModalitys(ax);
+          setLoadingModalities(true);
+          const ax = await url.GetModalities(urlApi);
+          setModalities(ax);
         } catch (err) {
           console.log(err)
         } finally {
           setTimeout(() => {
-            setLoadingModalitys(false);
+            setLoadingModalities(false);
           }, 1000);
           
         }
@@ -68,12 +69,15 @@ const useApi = () => {
       fetchModalities();
     }, []);
   
+    {/*Fetch infos to Home Page*/}
     useEffect(() => {
-      const fetchResultados = async () => {
+
+      {/*Fetch infos to Classification Grid on Home Page*/}
+      const fetchResults = async () => {
         try {
           const url = new Fetch(urlApi);
           setLoadingHome(true);
-          const ax = await url.GetResultados();
+          const ax = await url.GetResults();
           setResults(ax.times);
         } catch (err) {
           console.log(err);
@@ -84,37 +88,8 @@ const useApi = () => {
           }, 1000);
         }
       };
-  
-      fetchResultados();
-  
-      window.addEventListener('resize', resposiveBack); // Adiciona o evento de resize
-  
-      return () => {
-        window.removeEventListener('resize', resposiveBack); // Limpa o evento ao desmontar
-      };
 
-    }, []);
-  
-    useEffect(() => {
-      const fetchEventos = async () => {
-        try {
-          const url = new Fetch(urlApi);
-          setLoadingCalendar(true);
-          const ax = await url.GetEventos();
-          setGameData(ax);
-        } catch (err) {
-          console.log(err);
-        } finally {
-          setTimeout(() => {
-            setLoadingCalendar(false);            
-          }, 1000);
-        }
-      };
-  
-      fetchEventos();
-    }, []);
-  
-    useEffect(() => {
+      {/*Fetch text to Home Page*/}
       const fetchHome = async () => {
         try {
           const url = new Fetch(urlApi);
@@ -131,9 +106,39 @@ const useApi = () => {
       };
   
       fetchHome();
+      fetchResults();
+  
+      {/*Resizing event being added*/}
+      window.addEventListener('resize', resposiveBack);
+  
+      {/*Removing resizing when disassembling*/}
+      return () => {
+        window.removeEventListener('resize', resposiveBack);
+      };
+
+    }, []);
+  
+    {/*Fetch infos to Calendar Page*/}
+    useEffect(() => {
+      const fetchEvents = async () => {
+        try {
+          const url = new Fetch(urlApi);
+          setLoadingCalendar(true);
+          const ax = await url.GetCalendar();
+          setGameData(ax);
+        } catch (err) {
+          console.log(err);
+        } finally {
+          setTimeout(() => {
+            setLoadingCalendar(false);            
+          }, 1000);
+        }
+      };
+  
+      fetchEvents();
     }, []);
 
-    return { home, teams, results, modalitys, gameData, loadingHome, loadingCalendar, loadingModalitys, loadingTeams, error, background };
+    return { home, teams, results, modalities, gameData, loadingHome, loadingCalendar, loadingModalities, loadingTeams, background };
 };
 
 export default useApi;

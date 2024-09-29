@@ -4,7 +4,7 @@ import { Loading } from '../components/Loading';
 import useApi from '../hooks/useApi';
 
 export function Modalitys() {
-  const { loadingModalitys, modalitys } = useApi();
+  const { loadingModalities, modalities } = useApi();
   const [slidesToShow, setSlidesToShow] = useState(4);
 
   // Responsividade para determinar quantos slides exibir
@@ -33,10 +33,10 @@ export function Modalitys() {
     MODALIDADES DESTA EDIÇÃO
   </h1>
   <div className="flex w-full justify-center items-center">
-    {loadingModalitys ? (
+    {loadingModalities ? (
       <Loading />
     ) : (
-      <Slider modalitys={modalitys} slidesToShow={slidesToShow}/>
+      <Slider modalitys={modalities} slidesToShow={slidesToShow}/>
     )}
   </div>
 </div>

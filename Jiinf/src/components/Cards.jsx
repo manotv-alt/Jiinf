@@ -8,17 +8,18 @@ const ModalityCard = ({ name, description, imgSrc }) => {
   const [shadowColor, setShadowColor] = useState('rgba(0, 0, 0, 0.3)');
 
   const colorsChange = [
-    'rgba(0, 153, 0, 1)', // Verde
-    'rgba(0, 68, 250, 1)', // Azul
-    'rgba(255, 255, 0, 1)', // Amarelo
-    'rgba(255, 128, 0, 1)', // Laranja
-    'rgba(127, 0, 255, 1)', // Roxo
+    'rgba(0, 153, 0, 1)', // Green
+    'rgba(0, 68, 250, 1)', // Blue
+    'rgba(255, 255, 0, 1)', // Yellow
+    'rgba(255, 128, 0, 1)', // Orange
+    'rgba(127, 0, 255, 1)', // Purple
   ];
 
   const handleClick = () => {
     setClicked((prev) => !prev);
   };
 
+  {/*Function to change color effect*/}
   const colorChange = () => {
     if (clicked) {
       const randomColor = colorsChange[Math.floor(Math.random() * colorsChange.length)];
@@ -27,17 +28,17 @@ const ModalityCard = ({ name, description, imgSrc }) => {
       const interval = setInterval(() => {
         const randomColor = colorsChange[Math.floor(Math.random() * colorsChange.length)];
         setShadowColor(randomColor);
-      }, 500); // Muda a cor a cada 500ms
+      }, 500); // Color change interval
       setColorInterval(interval);
     } else {
-      setShadowColor('rgba(0, 0, 0, 0.3)'); // Volta para a sombra normal
-      clearInterval(colorInterval); // Limpa o intervalo ao clicar novamente
+      setShadowColor('rgba(0, 0, 0, 0.3)'); // Set standard shadow
+      clearInterval(colorInterval); // Clean interval when clicked again
     }
   };
 
   useEffect(() => {
     colorChange();
-    return () => clearInterval(colorInterval); // Limpa o intervalo ao desmontar
+    return () => clearInterval(colorInterval); // Clean interval when disassemble
   }, [clicked]);
 
   return (
@@ -71,6 +72,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [shadowColor, setShadowColor] = useState('rgba(0, 0, 0, 0)');
 
+  {/*Called function when card is clicked, to start a random 3d animation*/}
   const startRandomAnimation = () => {
     const randomX = Math.random() * 360 - 180;
     const randomY = Math.random() * 360 - 180;
@@ -104,6 +106,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
     return () => clearInterval(interval);
   }, [isAnimating, velocity]);
 
+  {/*Normalize position card function*/}
   const resetRotation = () => {
     const interval = setInterval(() => {
       setRotation((prev) => {
