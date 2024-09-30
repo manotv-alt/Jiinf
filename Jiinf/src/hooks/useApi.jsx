@@ -15,7 +15,24 @@ const useApi = () => {
     const [background, setBackground] = useState(null);
     const [results, setResults] = useState([]);
     const [home, setHome] = useState();
+    const [isOnline, setIsOnline] = useState(true);
+    const [isError, setIsError] = useState(false);
     const urlApi = import.meta.env.VITE_API_URL;
+
+    useEffect(() => {
+        const updateOnlineStatus = () => {
+            setIsOnline(navigator.onLine);
+        };
+
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+
+        // Cleanup function
+        return () => {
+            window.removeEventListener('online', updateOnlineStatus);
+            window.removeEventListener('offline', updateOnlineStatus);
+        };
+    }, []);
   
     //Responsivity background control
     const resposiveBack = () => {
@@ -37,6 +54,7 @@ const useApi = () => {
           const data = await url.GetTeams();
           setTeams(data.equipes);
         } catch (err) {
+          setIsError(true);
           console.log(err);
         } finally {
           setTimeout(() => {
@@ -57,7 +75,8 @@ const useApi = () => {
           const ax = await url.GetModalities(urlApi);
           setModalities(ax);
         } catch (err) {
-          console.log(err)
+          setIsError(true);
+          console.log(err);
         } finally {
           setTimeout(() => {
             setLoadingModalities(false);
@@ -80,6 +99,7 @@ const useApi = () => {
           const ax = await url.GetResults();
           setResults(ax.times);
         } catch (err) {
+          setIsError(true);
           console.log(err);
         } finally {
           setTimeout(() => {
@@ -97,6 +117,7 @@ const useApi = () => {
           const ax = await url.GetHome();
           setHome(ax[0].texto);
         } catch (err) {
+          setIsError(true);
           console.log(err);
         } finally {
           setTimeout(() => {
@@ -127,6 +148,7 @@ const useApi = () => {
           const ax = await url.GetCalendar();
           setGameData(ax);
         } catch (err) {
+          setIsError(true);
           console.log(err);
         } finally {
           setTimeout(() => {
@@ -138,7 +160,7 @@ const useApi = () => {
       fetchEvents();
     }, []);
 
-    return { home, teams, results, modalities, gameData, loadingHome, loadingCalendar, loadingModalities, loadingTeams, background };
+    return { home, teams, results, modalities, gameData, loadingHome, loadingCalendar, loadingModalities, loadingTeams, background, isError, isOnline };
 };
 
 export default useApi;
