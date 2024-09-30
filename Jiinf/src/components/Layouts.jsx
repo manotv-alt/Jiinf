@@ -34,12 +34,13 @@ const Header = () => {
     }, []);
 
     return (
-        <header className={`flex flex-col min-w-screen justify-end items-center ${isMenuOpen ? 'h-[340px]' : 'h-[140px]'} bg-jiinf-primary transition-all duration-300`}>
+        <header className={`flex flex-col min-w-screen justify-end items-center ${isMenuOpen ? 'h-[304px]' : 'h-[140px]'} bg-jiinf-primary`}>
 
             {/* Top part of header */}
             <section className="flex flex-row justify-center md:justify-left items-center h-full w-full">
                 <NavLink to={"/"} className="flex min-w-fit">
-                    <img src="https://oogovalzsivvyrtsnesm.supabase.co/storage/v1/object/public/imagens/Elementos/Logo.png" alt="Logo" className={`flex ${isMenuOpen ? 'mt-48' : 'mt-6'} md:mt-4 h-80`}/>
+                    <img src="https://oogovalzsivvyrtsnesm.supabase.co/storage/v1/object/public/imagens/Elementos/Logo.png" alt="Logo" 
+                    className={`flex ${isMenuOpen ? 'mt-48' : 'mt-6'} md:mt-4 h-80`}/>
                 </NavLink>
                 <h2 className='hidden md:flex w-full text-white md:text-xl lg:text-2xl mt-8 mr-4 font-SuperDario h-full justify-end items-center'>JOGOS INTERNOS DO INSTITUTO DE INFORMÁTICA DA UFG</h2>
             </section>

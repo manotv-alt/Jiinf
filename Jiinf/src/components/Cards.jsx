@@ -59,7 +59,7 @@ const ModalityCard = ({ name, description, imgSrc }) => {
           <img src={imgSrc} alt="Ícone do Esporte" className="w-32 h-32 rounded-full border-2 border-black" />
           <h3 className="text-4xl font-SuperDario text-center">{name.toUpperCase()}</h3>
         </div>
-        <p className="text-lg mt-8 font-semibold text-justify">{description}</p>
+        <p className="text-lg mt-8 font-semibold text-center">{description}</p>
       </div>
     </div>
   );  
@@ -150,7 +150,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
             alt={title}
           />
         </div>
-        <p className="mt-4 font-semibold text-sm text-justify mb-2">{description}</p>
+        <p className="mt-4 font-semibold text-sm text-center mb-2">{description}</p>
       </div>
     </div>
   );
