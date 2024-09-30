@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'xl' : '1260px',
+      },
+
       colors: {
         jiinf: {
           primary: "#081c38",
@@ -18,13 +22,9 @@ export default {
       },
 
       fontFamily: {
-        pixel: ['"Pixelify Sans"', 'sans-serif'],      
         SuperDario: ['SuperDario', 'sans-serif'],
       },
     },
   },
   plugins: [],
 }
-
-//"#1E0152
-//E94F34

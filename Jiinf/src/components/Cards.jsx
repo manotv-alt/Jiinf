@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-
 const ModalityCard = ({ name, description, imgSrc }) => {
   const [clicked, setClicked] = useState(false);
   const [colorInterval, setColorInterval] = useState(null);
@@ -19,7 +18,7 @@ const ModalityCard = ({ name, description, imgSrc }) => {
     setClicked((prev) => !prev);
   };
 
-  {/*Function to change color effect*/}
+  //Function to change color effect
   const colorChange = () => {
     if (clicked) {
       const randomColor = colorsChange[Math.floor(Math.random() * colorsChange.length)];
@@ -32,6 +31,7 @@ const ModalityCard = ({ name, description, imgSrc }) => {
       setColorInterval(interval);
     } else {
       setShadowColor('rgba(0, 0, 0, 0.3)'); // Set standard shadow
+      setIsHovered(false);
       clearInterval(colorInterval); // Clean interval when clicked again
     }
   };
@@ -59,7 +59,7 @@ const ModalityCard = ({ name, description, imgSrc }) => {
           <img src={imgSrc} alt="Ícone do Esporte" className="w-32 h-32 rounded-full border-2 border-black" />
           <h3 className="text-4xl font-SuperDario text-center">{name.toUpperCase()}</h3>
         </div>
-        <p className="text-lg mt-8 font-semibold text-center">{description}</p>
+        <p className="text-lg mt-8 font-semibold text-justify">{description}</p>
       </div>
     </div>
   );  
@@ -69,10 +69,9 @@ const TeamCard = ({ title, description, imageSrc }) => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [velocity, setVelocity] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
   const [shadowColor, setShadowColor] = useState('rgba(0, 0, 0, 0)');
 
-  {/*Called function when card is clicked, to start a random 3d animation*/}
+  //Called function when card is clicked, to start a random 3d animation
   const startRandomAnimation = () => {
     const randomX = Math.random() * 360 - 180;
     const randomY = Math.random() * 360 - 180;
@@ -83,6 +82,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
   useEffect(() => {
     let interval;
 
+    //Function to desacelere the card
     if (isAnimating) {
       interval = setInterval(() => {
         setRotation((prev) => ({
@@ -106,7 +106,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
     return () => clearInterval(interval);
   }, [isAnimating, velocity]);
 
-  {/*Normalize position card function*/}
+  //Normalize position card function
   const resetRotation = () => {
     const interval = setInterval(() => {
       setRotation((prev) => {
@@ -128,11 +128,9 @@ const TeamCard = ({ title, description, imageSrc }) => {
       className={`relative w-60 bg-jiinf-primary rounded-xl shadow-md overflow-hidden m-4 text-white
         cursor-pointer transition-transform duration-200 select-none`}
       onMouseEnter={() => {
-        setIsHovered(true);
         setShadowColor('rgba(0, 68, 250, 1)');
       }}
       onMouseLeave={() => {
-        setIsHovered(false);
         setShadowColor('rgba(0, 0, 0, 0)');
       }}
       onClick={startRandomAnimation}
@@ -152,7 +150,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
             alt={title}
           />
         </div>
-        <p className="mt-4 font-semibold text-sm text-center">{description}</p>
+        <p className="mt-4 font-semibold text-sm text-justify mb-2">{description}</p>
       </div>
     </div>
   );

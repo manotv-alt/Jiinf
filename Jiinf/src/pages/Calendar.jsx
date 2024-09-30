@@ -12,6 +12,7 @@ export function Calendar() {
   const [noGamesFound, setNoGamesFound] = useState(false);
 
   useEffect(() => {
+    //Function to show the filtered teams
     const checkFilteredGames = async () => {
       if (!loadingCalendar && gameData) {
         const filteredGames = gameData.filter((game) => {
@@ -31,11 +32,13 @@ export function Calendar() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
+      {/* Pickers container */}
       <div className="flex px-4 flex-col my-8 sm:flex-row md:my-16 w-full items-center justify-center gap-6 md:gap-8">
         <DatePicker onChange={setSelectedDate} />
         <TeamPicker onChange={setSelectedTeam} />
       </div>
-  
+
+      {/* Gamecards mapping */}
       {loadingCalendar ? (
         <Loading/>
       ) : (

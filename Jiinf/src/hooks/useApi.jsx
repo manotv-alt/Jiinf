@@ -17,7 +17,7 @@ const useApi = () => {
     const [home, setHome] = useState();
     const urlApi = import.meta.env.VITE_API_URL;
   
-    {/*Responsivity background control*/}
+    //Responsivity background control
     const resposiveBack = () => {
       if (window.innerWidth >= 1024) {
         setBackground(mediumback);
@@ -28,7 +28,7 @@ const useApi = () => {
       }
     };
   
-    {/*Fetch infos to Teams Page*/}
+    //Fetch infos to Teams Page
     useEffect(() => {
       const fetchTeams = async () => {
         try {
@@ -48,7 +48,7 @@ const useApi = () => {
       fetchTeams();
     }, []);
   
-    {/*Fetch infos to Modalities Page*/}
+    //Fetch infos to Modalities Page
     useEffect(() => {
       const fetchModalities = async () => {
         try {
@@ -69,10 +69,10 @@ const useApi = () => {
       fetchModalities();
     }, []);
   
-    {/*Fetch infos to Home Page*/}
+    //Fetch infos to Home Page
     useEffect(() => {
 
-      {/*Fetch infos to Classification Grid on Home Page*/}
+      //Fetch infos to Classification Grid on Home Page
       const fetchResults = async () => {
         try {
           const url = new Fetch(urlApi);
@@ -89,7 +89,7 @@ const useApi = () => {
         }
       };
 
-      {/*Fetch text to Home Page*/}
+      //Fetch text to Home Page
       const fetchHome = async () => {
         try {
           const url = new Fetch(urlApi);
@@ -108,17 +108,17 @@ const useApi = () => {
       fetchHome();
       fetchResults();
   
-      {/*Resizing event being added*/}
+      //Resizing event being added
       window.addEventListener('resize', resposiveBack);
   
-      {/*Removing resizing when disassembling*/}
+      //Removing resizing when disassembling
       return () => {
         window.removeEventListener('resize', resposiveBack);
       };
 
     }, []);
   
-    {/*Fetch infos to Calendar Page*/}
+    //Fetch infos to Calendar Page
     useEffect(() => {
       const fetchEvents = async () => {
         try {

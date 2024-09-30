@@ -3,21 +3,21 @@ import Slider from '../components/Slider';
 import { Loading } from '../components/Loading';
 import useApi from '../hooks/useApi';
 
-export function Modalitys() {
+export function Modalities() {
   const { loadingModalities, modalities } = useApi();
   const [slidesToShow, setSlidesToShow] = useState(4);
 
-  // Responsividade para determinar quantos slides exibir
+  // Responsivity to show the right quantity of cards
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setSlidesToShow(4); // 4 cards em telas grandes
+        setSlidesToShow(4); // 4 cards on large screens
       } else if (window.innerWidth >= 768) {
-        setSlidesToShow(3); // 3 cards em tablets
+        setSlidesToShow(3); // 3 cards on tablets
       } else if (window.innerWidth >= 640) {
-        setSlidesToShow(2); // 2 cards em telas médias
+        setSlidesToShow(2); // 2 cards on middle screens
       } else {
-        setSlidesToShow(1); // 1 card em telas pequenas
+        setSlidesToShow(1); // 1 card on small screens
       }
     };
 
@@ -32,11 +32,13 @@ export function Modalitys() {
   <h1 className="font-SuperDario text-center text-6xl md:text-7xl text-jiinf-titles pb-10">
     MODALIDADES DESTA EDIÇÃO
   </h1>
+
+  {/* Modalities card container*/}
   <div className="flex w-full justify-center items-center">
     {loadingModalities ? (
       <Loading />
     ) : (
-      <Slider modalitys={modalities} slidesToShow={slidesToShow}/>
+      <Slider modalities={modalities} slidesToShow={slidesToShow}/>
     )}
   </div>
 </div>

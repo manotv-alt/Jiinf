@@ -9,11 +9,12 @@ export function Teams() {
     <div className="pt-8 flex flex-col w-full items-center justify-center">
       <h1 className="font-SuperDario text-6xl md:text-7xl text-jiinf-titles pb-10">PARTICIPANTES</h1>
 
+      {/* Teams card container */}
       <div className="w-full md:px-12 lg:px-16">
         {loadingTeams ? (
           <Loading/>
         ) : (
-          <div className="w-full flex justify-center items-center px-4">
+          <div className="w-full flex justify-center items-center pt-1 px-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
               {Array.isArray(teams) && teams.map((team, index) => (
                 <TeamCard

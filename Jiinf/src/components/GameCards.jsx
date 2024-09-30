@@ -37,7 +37,7 @@ const GameCard = ({ game }) => {
         <div className="flex flex-row w-full items-center justify-between mt-4">
           <div className="flex flex-col md:min-w-[80px] text-center justify-center items-center">
             <img src={game.TimeA.url_image} alt="Logo do Time A" className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" />
-            <p className="hidden sm:flex text-md md:text-lg font-semibold text-jiinf-primary">{game.TimeA.nome}</p>
+            <p className="hidden sm:flex text-base md:text-lg font-semibold text-jiinf-primary">{game.TimeA.nome}</p>
           </div>
   
           {/*Score section*/}
@@ -49,7 +49,7 @@ const GameCard = ({ game }) => {
   
           <div className="flex flex-col md:min-w-[80px] text-center items-center">
             <img src={game.TimeB.url_image} alt="Logo do Time B" className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" />
-            <p className="hidden sm:flex text-md md:text-lg font-semibold text-jiinf-primary">{game.TimeB.nome}</p>
+            <p className="hidden sm:flex text-base md:text-lg font-semibold text-jiinf-primary">{game.TimeB.nome}</p>
           </div>
         </div>
 
@@ -71,7 +71,7 @@ const GameCard = ({ game }) => {
             {game.horario}
           </div>
 
-          <div className="lg:text-md md:text-sm text-jiinf-primary font-semibold">
+          <div className="lg:text-base md:text-sm text-jiinf-primary font-semibold">
             {dateLabel}
           </div>
 
@@ -127,7 +127,7 @@ const GameCardNone = ({ game }) => {
                 alt="Logo time" 
                 className="min-w-12 h-12 md:min-w-14 md:min-h-14 lg:min-h-16 lg:min-w-16 rounded-full mb-1" 
               />
-              <p className="hidden md:flex text-md w-full lg:text-lg font-semibold text-jiinf-primary">
+              <p className="hidden md:flex text-base w-full lg:text-lg font-semibold text-jiinf-primary">
                 {team.nome}
               </p>
             </div>
@@ -149,7 +149,7 @@ const GameCardNone = ({ game }) => {
             <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
             {game.horario}
           </div>
-          <div className="lg:text-md md:text-sm text-jiinf-primary font-semibold">{dateLabel}</div>
+          <div className="lg:text-base md:text-sm text-jiinf-primary font-semibold">{dateLabel}</div>
           <div className={`px-8 text-center md:px-4 py-2 rounded-lg mt-2 ${game.status === 'Finalizado' ? 'bg-green-500' : 'bg-jiinf-primary'}`}>
             {game.status === 'Finalizado' ? 'Finalizado' : 'Não iniciado'}
           </div>

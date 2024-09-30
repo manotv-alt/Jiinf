@@ -6,12 +6,13 @@ import { Github, Instagram, Linkedin } from 'lucide-react';
 const Header = () => {
     const { isCurrentPage } = usePath();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+    
+    //Header navigation options
     const navItems = [
         { to: '/', label: 'INÍCIO' },
         { to: '/teams', label: 'EQUIPES' },
         { to: '/calendar', label: 'CALENDÁRIO' },
-        { to: '/modalitys', label: 'MODALIDADES' },
+        { to: '/modalities', label: 'MODALIDADES' },
     ];
 
     const toggleMenu = () => {
@@ -40,7 +41,7 @@ const Header = () => {
                 <NavLink to={"/"} className="flex min-w-fit">
                     <img src="https://oogovalzsivvyrtsnesm.supabase.co/storage/v1/object/public/imagens/Elementos/Logo.png" alt="Logo" className={`flex ${isMenuOpen ? 'mt-48' : 'mt-6'} md:mt-4 h-80`}/>
                 </NavLink>
-                <h2 className='hidden md:flex w-full text-white text-md md:text-xl lg:text-2xl mt-8 mr-4 font-SuperDario h-full justify-end items-center'>JOGOS INTERNOS DO INSTITUTO DE INFORMÁTICA DA UFG</h2>
+                <h2 className='hidden md:flex w-full text-white md:text-xl lg:text-2xl mt-8 mr-4 font-SuperDario h-full justify-end items-center'>JOGOS INTERNOS DO INSTITUTO DE INFORMÁTICA DA UFG</h2>
             </section>
 
             {/* Hamburguer menu for small screens */}
