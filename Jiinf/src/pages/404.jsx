@@ -3,7 +3,7 @@ const Error404 = () => {
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
             <img
-                src="../../public/vasco-logo.png"
+                src="/vasco-logo.png"
                 alt="Offline"
                 className="mb-4 w-32"
             />
