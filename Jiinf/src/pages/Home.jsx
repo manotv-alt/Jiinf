@@ -34,24 +34,24 @@ export function Home() {
             <img 
               src={background} 
               alt="bg-home"
-              className="flex h-full rounded-lg w-full lg:opacity-45 lg:rounded-r-none lg:rounded-l-lg"
+              className="flex h-full rounded-lg w-full lg:rounded-r-none lg:rounded-l-lg"
             />
 
           {/* Home text */}
             <div className="absolute top-0 flex items-center justify-center text-justify">
-              <h2 className="hidden lg:flex text-white text-border text-sm xl:text-base mx-20 mt-32 font-semibold text-justify">
+              <h2 className="hidden lg:flex text-white text-sm xl:text-base mx-20 mt-32 font-semibold text-justify">
                 {home ? home : ' '}
               </h2>
             </div>
 
           </div>
 
-          <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full lg:border-l-2 bg-jiinf-primary lg:bg-jiinf-secondary bg-opacity-80 lg:bg-opacity-100 rounded-lg lg:rounded-r-lg lg:rounded-l-none md:rounded-r-lg">
-            <h2 className="text-white text-border text-4xl md:text-5xl font-SuperDario lg:text-6xl flex mt-4 justify-center text-border">CLASSIFICAÇÃO GERAL</h2>
+          <div className="absolute right-0 top-0 w-full lg:w-2/5 h-full lg:border-l-2 bg-jiinf-primary bg-opacity-80 lg:bg-opacity-100 rounded-lg lg:rounded-r-lg lg:rounded-l-none md:rounded-r-lg">
+            <h2 className="text-white text-4xl md:text-5xl font-SuperDario lg:text-6xl flex mt-4 justify-center">CLASSIFICAÇÃO GERAL</h2>
 
             <div className="flex justify-between w-full mt-12">
-              <div className="flex flex-row justify-between w-full items-center">
-                <h2 className="flex font-SuperDario text-2xl md:text-4xl ml-4 mr-16 lg:mr-28 text-white text-border justify-start">EQUIPES</h2>
+              <div className="flex flex-row justify-between w-full items-center md:mx-4">
+                <h2 className="flex font-SuperDario text-2xl md:text-4xl ml-4 mr-16 lg:mr-28 text-white justify-start">EQUIPES</h2>
 
                 <div className="flex w-full flex-row justify-end gap-5 lg:gap-6 mr-3 lg:mr-6">
                   {/* Icons and medals quantity */}
@@ -66,7 +66,7 @@ export function Home() {
                   </div>
                 </div>
 
-                <h2 className="font-SuperDario text-2xl md:text-4xl md:min-w-[83px] text-white text-border mr-3 lg:mr-4">PONTOS</h2>
+                <h2 className="font-SuperDario text-2xl md:text-4xl md:min-w-[83px] text-white mr-3 lg:mr-4">PONTOS</h2>
               </div>
             </div>
 
@@ -74,28 +74,28 @@ export function Home() {
             <div className="flex flex-col w-full mt-8">
               {Array.isArray(sortedTeams) && sortedTeams.length > 0 ? (
                 sortedTeams.map((team, index) => (
-                  <div key={team.id} className="flex flex-row justify-start items-start ml-4 mb-4 border-b border-white pb-4">
-                    <h3 className="text-white text-border font-SuperDario text-3xl md:text-4xl">{index + 1}</h3>
+                  <div key={team.nome} className="flex flex-row justify-start items-start ml-4 md:mx-4 mb-4 border-b border-white pb-4">
+                    <h3 className="text-white font-SuperDario text-3xl md:text-4xl">{index + 1}</h3>
                     <div className="flex flex-col w-full md:w-full md:flex-row md:pl-5 h-full justify-center md:justify-start items-center">
-                      <img src={team.url_image} alt={`${team.nome}-logo`} className="flex min-w-12 h-12 lg:w-16 lg:h-16"/>
+                      <img src={team.url_image} alt={`${team.nome}-logo`} className="flex rounded-full ring-2 ring-white min-w-12 h-12 lg:w-16 lg:h-16"/>
                       <h3 className="text-white font-SuperDario text-lg md:text-2xl md:ml-3">{team.nome.toUpperCase()}</h3>
                     </div>
                     
                     <div className="flex flex-row w-full md:min-w-[155px] items-center gap-5 justify-end mr-3 md:gap-5 md:mr-3 lg:gap-6 lg:mr-7">
       
                     <div className="flex flex-col items-center w-6 h-6 md:w-10 md:h-10">
-                        <h3 className="flex text-white text-border font-SuperDario text-3xl md:text-4xl">{team.total_medalhas.OURO}</h3>
+                        <h3 className="flex text-white font-SuperDario text-3xl md:text-4xl">{team.total_medalhas.OURO}</h3>
                     </div>
                     <div className="flex flex-col items-center w-6 h-6 md:w-10 md:h-10">
-                        <h3 className="flex text-white text-border font-SuperDario text-3xl md:text-4xl">{team.total_medalhas.PRATA}</h3>
+                        <h3 className="flex text-white font-SuperDario text-3xl md:text-4xl">{team.total_medalhas.PRATA}</h3>
                     </div>
                     <div className="flex flex-col items-center w-6 h-6 md:w-10 md:h-10">
-                        <h3 className="flex text-white text-border font-SuperDario text-3xl md:text-4xl">{team.total_medalhas.BRONZE}</h3>
+                        <h3 className="flex text-white font-SuperDario text-3xl md:text-4xl">{team.total_medalhas.BRONZE}</h3>
                     </div>
       
                     </div>
 
-                    <h3 className="text-white text-border min-w-[55.5px] mr-3 text-center md:min-w-[83px] md:text-center font-SuperDario text-3xl md:text-4xl">{team.total_pontos}</h3>
+                    <h3 className="text-white min-w-[55.5px] mr-3 text-center md:min-w-[83px] md:text-center font-SuperDario text-3xl md:text-4xl">{team.total_pontos}</h3>
                   </div>
                 ))
               ) : (

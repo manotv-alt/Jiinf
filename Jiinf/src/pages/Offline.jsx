@@ -3,7 +3,7 @@ const OfflineScreen = () => {
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
             <img
-                src="./vasco-logo.png"
+                src="../../public/vasco-logo.png"
                 alt="Offline"
                 className="mb-4 w-32"
             />
