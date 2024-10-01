@@ -1,9 +1,12 @@
 //Offline style page
 const OfflineScreen = () => {
+    const imgSrc = './vasco-logo.png'
+    console.log(imgSrc);
+
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
             <img
-                src="/vasco-logo.png"
+                src={imgSrc}
                 alt="Offline"
                 className="mb-4 w-32"
             />
