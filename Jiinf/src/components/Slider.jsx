@@ -67,7 +67,7 @@ const Slider = ({ modalities, slidesToShow }) => {
         {modalities.map((_, index) => (
           <div
             key={index}
-            className={`h-2 w-2 rounded-full ${index === currentIndex ? 'bg-black' : 'bg-gray-400'}`}
+            className={`h-1.5 w-1.5 md:h-2 md:w-2 rounded-full ${index === currentIndex ? 'bg-black' : 'bg-gray-400'}`}
           ></div>
         ))}
       </div>

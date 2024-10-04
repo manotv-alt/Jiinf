@@ -99,62 +99,66 @@ const Footer = () => {
     return (
         <footer className=" bg-jiinf-primary text-white py-4 mt-auto">
           <div className="container mx-auto px-4">
-            <div className="flex flex-col  items-center md:flex-row md:justify-between">
+            <div className="flex flex-col items-center md:flex-row md:justify-between">
               <div className="text-center md:text-left mb-4 md:mb-0">
-                <div className='flex flex-row gap-3 items-center justify-center'>
-                    <p className="text-lg font-semibold">Unificada</p>
+                <div className='flex flex-row gap-2 items-center justify-center'>
+                    <p className="text-sm md:text-lg font-semibold">Unificada</p>
                     <a 
                     href="https://www.instagram.com/unificadaufg/"
                     target="_blank"
                     rel="noopener noreferrer">
-                        <Instagram className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                        <Instagram className='text-white w-4 md:h-5 md:w-5 hover:text-jiinf-secondary cursor-pointer'/>
                     </a>
                 </div>
-                <p className="text-sm mt-2">© 2024 Unificada. All rights reserved.</p>              
+                <p className="text-xs md:text-sm mt-2">© 2024 Unificada. All rights reserved.</p>              
               </div>
 
+              <div className='flex h-full flex-col items-center justify-center'>
               <div className='flex flex-col gap-3'>
-                <div className='flex flex-row gap-2 items-center justify-center'>
-                    <p className="text-sm">Developed by</p>
+                <div className='flex flex-row gap-1 items-center justify-center'>
+                    <p className="text-xs md:text-sm">Developed by</p>
                     
                     <a 
                     href="https://github.com/manotv-alt" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className='flex flex-row gap-2 hover:text-jiinf-secondary'>
-                        <p className='text-sm cursor-pointer'>manotv-alt</p>
-                        <Github className='h-5 w-5 cursor-pointer'/>
+                    className='flex flex-row items-center gap-2 hover:text-jiinf-secondary'>
+                        <p className='text-xs md:text-sm cursor-pointer'>manotv-alt</p>
+                        <Github className='w-4 md:h-5 md:w-5 cursor-pointer'/>
                     </a>
 
                     <a 
                     href="https://www.linkedin.com/in/emmanuel-fernandes-a04646289/"
                     target="_blank"
-                    rel="noopener noreferrer">
-                        <Linkedin className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                    rel="noopener noreferrer"
+                    >
+                        <Linkedin className='text-white w-4 md:h-5 md:w-5 hover:text-jiinf-secondary cursor-pointer'/>
                     </a>
 
                 </div>
 
-                <div className='flex flex-row gap-2 items-center justify-center'>
-                    <p className="text-sm">and</p>
+                <div className='flex flex-row gap-1 items-center justify-center'>
+                    <p className="text-xs md:text-sm">and</p>
                     
                     <a 
                     href="https://github.com/LuisFcarmo" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className='flex flex-row gap-2 hover:text-jiinf-secondary'>
-                        <p className='text-sm cursor-pointer'>LuisFcarmo</p>
-                        <Github className='h-5 w-5 cursor-pointer'/>
+                    className='flex flex-row items-center gap-2 hover:text-jiinf-secondary'>
+                        <p className='text-xs md:text-sm cursor-pointer'>LuisFcarmo</p>
+                        <Github className='w-4 md:h-5 md:w-5 cursor-pointer'/>
                     </a>
 
                     <a 
                     href="https://www.linkedin.com/in/luis-cesar-ferreira-do-carmo/"
                     target="_blank"
                     rel="noopener noreferrer">
-                        <Linkedin className='text-white h-5 w-5 hover:text-jiinf-secondary cursor-pointer'/>
+                        <Linkedin className='text-white w-4 md:h-5 md:w-5 hover:text-jiinf-secondary cursor-pointer'/>
                     </a>
 
                 </div>
+              </div>
+              
               </div>
               
             </div>
