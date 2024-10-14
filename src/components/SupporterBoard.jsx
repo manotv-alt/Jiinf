@@ -5,8 +5,8 @@ const SupporterBoard = () => {
   const { teams, UpdateVotes } = useApi();
   const [mostVotedTeam, setMostVotedTeam] = useState(null);
   const [sortedTeams, setSortedTeams] = useState([]);
+
   const [votedTeams, setVotedTeams] = useState(() => {
-    // Carrega os times votados do LocalStorage ao iniciar
     const savedVotes = localStorage.getItem("votedTeams");
     return savedVotes ? JSON.parse(savedVotes) : [];
   });
