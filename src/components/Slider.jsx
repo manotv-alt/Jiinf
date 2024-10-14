@@ -6,6 +6,17 @@ const Slider = ({ modalities, slidesToShow }) => {
 
   const totalCards = modalities.length;
 
+  const preloadImages = (modalities) => {
+    modalities.forEach((modality) => {
+      const img = new Image();
+      img.src = modality.url_image;
+    });
+  };
+
+  useEffect(() => {
+    preloadImages(modalities);
+  }, [modalities]);
+
   // Prev slider function
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
@@ -78,6 +89,13 @@ const Slider = ({ modalities, slidesToShow }) => {
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const preloadImages = (imageUrls) => {
+    imageUrls.forEach((url) => {
+      const img = new Image();
+      img.src = url;
+    });
+  };  
+
   // Função para passar para a próxima imagem
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -94,6 +112,9 @@ const Carousel = ({ images }) => {
 
   // Transição automática a cada 3 segundos
   useEffect(() => {
+
+    preloadImages(images);
+
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval); // Limpa o intervalo ao desmontar o componente
   }, [currentIndex]);
