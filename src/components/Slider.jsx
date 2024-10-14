@@ -99,7 +99,7 @@ const Carousel = ({ images }) => {
   }, [currentIndex]);
 
   return (
-    <div className="hidden md:flex relative w-full overflow-hidden rounded-lg shadow-lg ring-2 ring-jiinf-primary mt-12 ml-8">
+    <div className="hidden md:flex relative w-full overflow-hidden rounded-lg shadow-lg ring-2 ring-jiinf-primary mt-8 ml-8">
       {/* Imagem atual */}
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-500"
