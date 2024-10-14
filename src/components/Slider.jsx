@@ -94,40 +94,46 @@ const Carousel = ({ images }) => {
       const img = new Image();
       img.src = url;
     });
-  };  
+  };
 
-  // Função para passar para a próxima imagem
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      images.length > 0 ? (prevIndex + 1) % images.length : 0
     );
   };
 
-  // Função para voltar à imagem anterior
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      images.length > 0 ? (prevIndex - 1 + images.length) % images.length : 0
     );
   };
 
-  // Transição automática a cada 3 segundos
   useEffect(() => {
-
-    preloadImages(images);
-
     const interval = setInterval(nextSlide, 3000);
-    return () => clearInterval(interval); // Limpa o intervalo ao desmontar o componente
-  }, [currentIndex]);
+    return () => clearInterval(interval);
+  }, [images]);
+
+  useEffect(() => {
+    preloadImages(images);
+  }, [images]);
+
+  useEffect(() => {
+    if (currentIndex >= images.length) {
+      setCurrentIndex(0);
+    }
+  }, [images, currentIndex]);
+
+  if (!images || images.length === 0) {
+    return null; // Ou um indicador de carregamento
+  }
 
   return (
     <div className="hidden md:flex relative w-full overflow-hidden rounded-lg shadow-lg ring-2 ring-jiinf-primary mt-8 ml-8">
-      {/* Imagem atual */}
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-500"
-        style={{ backgroundImage: `url(${images[currentIndex]})` }}
+        style={{ backgroundImage: `url('${images[currentIndex]}')` }}
       ></div>
 
-      {/* Botão para imagem anterior */}
       <button
         onClick={prevSlide}
         className="absolute top-1/2 left-4 ring-2 ring-jiinf-primary -translate-y-1/2 w-12 h-12 bg-white text-jiinf-primary hover:text-white p-2 rounded-full hover:bg-jiinf-secondary"
@@ -135,7 +141,6 @@ const Carousel = ({ images }) => {
         &#10094;
       </button>
 
-      {/* Botão para próxima imagem */}
       <button
         onClick={nextSlide}
         className="absolute top-1/2 right-4 ring-2 ring-jiinf-primary -translate-y-1/2 w-12 h-12 bg-white text-jiinf-primary hover:text-white p-2 rounded-full hover:bg-jiinf-secondary"
@@ -143,7 +148,6 @@ const Carousel = ({ images }) => {
         &#10095;
       </button>
 
-      {/* Indicadores de página */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
         {images.map((_, index) => (
           <div

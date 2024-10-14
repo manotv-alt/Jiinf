@@ -159,6 +159,7 @@ const GameCardNone = ({ game }) => {
           </div>
           </a>
           
+          
           <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
             <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
             {game.horario}
