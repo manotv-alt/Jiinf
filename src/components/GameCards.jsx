@@ -61,10 +61,17 @@ const GameCard = ({ game }) => {
   
         {/*Right section container*/}
         <div className="flex flex-col md:min-w-[100px] lg:min-w-[280px] mt-2 items-center justify-center text-center">
-          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
-            <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
-            {game.local}
-          </div>
+          <a 
+          href={game.localizacao_url}
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="pointer">
+            <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
+              <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
+              {game.local}
+            </div>
+          </a>
+          
 
           <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
             <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
@@ -140,10 +147,17 @@ const GameCardNone = ({ game }) => {
   
         {/*Right section container*/}
         <div className="flex flex-col md:min-w-[100px] lg:min-w-[280px] mt-2 items-center justify-center text-center">
-          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
+          
+          <a 
+          href={game.localizacao_url}
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="pointer">
+          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
             <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
             {game.local}
           </div>
+          </a>
           
           <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
             <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
