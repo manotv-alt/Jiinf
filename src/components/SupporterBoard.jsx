@@ -40,7 +40,7 @@ const SupporterBoard = () => {
 
   return (
     <div className="w-full mx-4 md:w-1/2 md:mx-8 mt-8 ring-2 ring-jiinf-primary bg-jiinf-secondary rounded-lg shadow-lg p-6 space-y-6">
-      <h2 className="text-3xl font-bold text-white text-center mb-4">Torcedômetro</h2>
+      <h2 className="text-3xl font-bold text-white text-center mb-4">Torcidômetro</h2>
       {sortedTeams.map((team, index) => {
         const votePercentage = (team.total_votos / mostVotedTeam) * 100;
         const isVoted = votedTeams.includes(team.time_id); // Verifica se já votado
