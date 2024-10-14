@@ -136,7 +136,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
       onClick={startRandomAnimation}
       style={{
         transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-        boxShadow: `0 8px 20px ${shadowColor}`,
+        boxShadow: `5px 5px ${shadowColor}`,
         transition: isAnimating ? 'none' : 'transform 0.3s ease, box-shadow 0.3s ease',
         perspective: '1000px',
       }}

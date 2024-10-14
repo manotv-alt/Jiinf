@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Slider from '../components/Slider';
+import { Slider } from '../components/Slider';
 import { Loading } from '../components/Loading';
 import useApi from '../hooks/useApi';
 
