@@ -9,7 +9,7 @@ import { Carousel } from "../components/Slider";
 
 export function Home() {
   
-  const { background, home, loadingHome, results } = useApi();
+  const { background, home, loadingHome, loadingTeams, results } = useApi();
   const [ sortedTeams, setSortedTeams ] = useState([]);
   
   useEffect(() => {
@@ -25,7 +25,7 @@ export function Home() {
   }, [loadingHome, results]);
 
   return (
-    loadingHome ? (
+    (loadingHome && loadingTeams) ? (
       <Loading />
     ) : (
       <div className="relative min-w-screen">
