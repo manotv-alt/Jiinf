@@ -129,6 +129,7 @@ const useApi = () => {
 
     const UpdateVotes = async (teamId) => {
         try {
+          setLoadingHome(true);
             const response = await fetch(`${urlApi}/api/v1/times/atualizar_pontos/${teamId}/`, {
                 method: "POST",
                 headers: {
@@ -147,10 +148,12 @@ const useApi = () => {
         } catch (error) {
             setIsError(true);
             throw error;
+        } finally {
+          setLoadingHome(false);            
         }
     };
   
-    //Fetch infos to Teams Page
+    //Fetch infos called
     useEffect(() => {
       
       fetchTeams();
