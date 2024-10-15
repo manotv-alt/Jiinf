@@ -89,7 +89,6 @@ const Slider = ({ modalities, slidesToShow }) => {
 
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { loadingHome } = useApi();
 
   const preloadImages = (imageUrls) => {
     imageUrls.forEach((url) => {
@@ -117,11 +116,7 @@ const Carousel = ({ images }) => {
 
   
   useEffect(() => {
-
-    if(loadingHome === false) {
       preloadImages(images);
-    }
-
   }, [images]);
 
   useEffect(() => {
