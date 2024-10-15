@@ -129,7 +129,7 @@ const GameCardNone = ({ game }) => {
         <div className="flex flex-row w-full gap-8 md:gap-0 justify-center items-center md:justify-between mt-4">
           {teams.map((team, index) => (
             <div key={index} className="flex flex-col md:w-[76px] lg:w-[80px] text-center items-center">
-              <img 
+              <img
                 src={team.url_image} 
                 alt="Logo time" 
                 className="min-w-12 h-12 md:min-w-14 md:min-h-14 lg:min-h-16 lg:min-w-16 rounded-full mb-1" 
