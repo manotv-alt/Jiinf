@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ModalityCard } from './Cards';
+import useApi from '../hooks/useApi';
 
 const Slider = ({ modalities, slidesToShow }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -88,6 +89,7 @@ const Slider = ({ modalities, slidesToShow }) => {
 
 const Carousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { loadingHome } = useApi();
 
   const preloadImages = (imageUrls) => {
     imageUrls.forEach((url) => {
@@ -113,8 +115,13 @@ const Carousel = ({ images }) => {
     return () => clearInterval(interval);
   }, [images]);
 
+  
   useEffect(() => {
-    preloadImages(images);
+
+    if(loadingHome === false) {
+      preloadImages(images);
+    }
+
   }, [images]);
 
   useEffect(() => {
@@ -124,7 +131,7 @@ const Carousel = ({ images }) => {
   }, [images, currentIndex]);
 
   if (!images || images.length === 0) {
-    return null; // Ou um indicador de carregamento
+    return 1;
   }
 
   return (
