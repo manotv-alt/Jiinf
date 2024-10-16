@@ -114,25 +114,18 @@ const Carousel = ({ images }) => {
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
   }, [images]);
-
   
   useEffect(() => {
-
     if(loadingHome === false) {
       preloadImages(images);
     }
-
-  }, [images]);
+  }, []);
 
   useEffect(() => {
     if (currentIndex >= images.length) {
       setCurrentIndex(0);
     }
   }, [images, currentIndex]);
-
-  if (!images || images.length === 0) {
-    return 1;
-  }
 
   return (
     <div className="hidden md:flex relative w-full overflow-hidden rounded-lg shadow-lg ring-2 ring-jiinf-primary mt-8 ml-8">
