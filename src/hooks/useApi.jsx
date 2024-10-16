@@ -162,6 +162,8 @@ const useApi = () => {
       fetchHome();
       fetchResults();
 
+      resposiveBack();
+
       //Resizing event being added
       window.addEventListener('resize', resposiveBack);
   
