@@ -11,21 +11,17 @@ export function Home() {
   
   const { background, home, loadingHome, loadingTeams, results } = useApi();
   const [ sortedTeams, setSortedTeams ] = useState([]);
+  const isLoading = loadingHome || loadingTeams;
   
   useEffect(() => {
-    //Function to sort teams by total score
-    const sortedTeamsFunc = async () => {
-      if (loadingHome === false) {
-        const ax = results.sort((a, b) => b.total_pontos - a.total_pontos);
-        setSortedTeams(ax);
-      }
-    };
-
-    sortedTeamsFunc();
-  }, [loadingHome, results]);
+    if (!loadingHome && Array.isArray(results) && results.length > 0) {
+      const sorted = results.sort((a, b) => b.total_pontos - a.total_pontos);
+      setSortedTeams(sorted);
+    }
+  }, [loadingHome, results]);  
 
   return (
-    (loadingHome && loadingTeams) ? (
+    isLoading ? (
       <Loading />
     ) : (
       <div className="relative min-w-screen">
@@ -100,23 +96,23 @@ export function Home() {
                     <div className="flex flex-row w-full md:min-w-[155px] items-center gap-5 justify-end mr-3 md:gap-5 md:mr-3 lg:gap-6 lg:mr-7">
                       <div className="flex flex-col items-center w-6 h-6 md:w-10 md:h-10">
                         <h3 className="flex text-white font-SuperDario text-2xl md:text-4xl">
-                          {team.total_medalhas.OURO}
+                          {team.total_medalhas.OURO || 0}
                         </h3>
                       </div>
                       <div className="flex flex-col items-center w-6 h-6 md:w-10 md:h-10">
                         <h3 className="flex text-white font-SuperDario text-2xl md:text-4xl">
-                          {team.total_medalhas.PRATA}
+                          {team.total_medalhas.PRATA || 0}
                         </h3>
                       </div>
                       <div className="flex flex-col items-center w-6 h-6 md:w-10 md:h-10">
                         <h3 className="flex text-white font-SuperDario text-2xl md:text-4xl">
-                          {team.total_medalhas.BRONZE}
+                          {team.total_medalhas.BRONZE || 0}
                         </h3>
                       </div>
                     </div>
   
                     <h3 className="text-white h-6 md:h-10 min-w-[55.5px] mr-3 text-center md:min-w-[83px] md:text-center font-SuperDario text-2xl md:text-4xl">
-                      {team.total_pontos}
+                      {team.total_pontos || 0}
                     </h3>
                   </div>
                 ))
