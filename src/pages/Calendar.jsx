@@ -11,24 +11,51 @@ export function Calendar() {
   const [filteredGames, setFilteredGames] = useState([]);
   const [noGamesFound, setNoGamesFound] = useState(false);
 
+  // Function to convert date and time to Date objects
+  const parseDateTime = (dia, horario) => {
+    const now = new Date(); // Using the current date
+    return new Date(now.getFullYear(), now.getMonth(), dia, ...horario.split(':'));
+  };
+
   useEffect(() => {
-    //Function to show the filtered teams
-    const checkFilteredGames = async () => {
-      if (!loadingCalendar && gameData) {
-        const filteredGames = gameData.filter((game) => {
-          const matchesTeam = selectedTeam ? game.TimeA.nome === selectedTeam || game.TimeB.nome === selectedTeam || game.TimeA.nome === game.TimeB.nome : true;
-          const matchesDate = selectedDate ? game.data.toString() === selectedDate : true;
-          return matchesDate && matchesTeam;
-        });
-  
-        setFilteredGames(filteredGames);
-        setNoGamesFound(filteredGames.length === 0);
+    const compareGames = (a, b) => {
+      const dateA = parseDateTime(a.data, a.horario);
+      const dateB = parseDateTime(b.data, b.horario);
+
+      // Put "Não iniciado" before "Finalizado"
+      if (a.status === "Não iniciado" && b.status === "Finalizado") return -1;
+      if (a.status === "Finalizado" && b.status === "Não iniciado") return 1;
+
+      // Ordening inside of the groups
+      if (a.status === "Não iniciado") {
+        return dateA - dateB; // Creasing order "Não iniciado"
+      } else {
+        return dateB - dateA; // Decreasing order "Finalizado"
       }
     };
-  
-    checkFilteredGames();
+
+    const filterAndSortGames = async () => {
+      if (!loadingCalendar && gameData) {
+        const filtered = gameData.filter((game) => {
+          const matchesTeam = selectedTeam
+            ? game.TimeA.nome === selectedTeam ||
+              game.TimeB.nome === selectedTeam ||
+              game.TimeA.nome === game.TimeB.nome
+            : true;
+          const matchesDate = selectedDate
+            ? game.data.toString() === selectedDate
+            : true;
+          return matchesDate && matchesTeam;
+        });
+
+        const sortedGames = filtered.sort(compareGames);
+        setFilteredGames(sortedGames);
+        setNoGamesFound(sortedGames.length === 0);
+      }
+    };
+
+    filterAndSortGames();
   }, [loadingCalendar, gameData, selectedDate, selectedTeam]);
-  
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
@@ -40,7 +67,7 @@ export function Calendar() {
 
       {/* Gamecards mapping */}
       {loadingCalendar ? (
-        <Loading/>
+        <Loading />
       ) : (
         <div className="flex flex-col w-full gap-8">
           {noGamesFound ? (
@@ -48,17 +75,16 @@ export function Calendar() {
               Nenhum esporte encontrado
             </h2>
           ) : (
-            filteredGames.map((game, index) => (
+            filteredGames.map((game, index) =>
               game.TimeA.nome === game.TimeB.nome ? (
                 <GameCardNone key={index} game={game} />
               ) : (
                 <GameCard key={index} game={game} />
               )
-            ))
+            )
           )}
         </div>
       )}
     </div>
   );
-  
 }
