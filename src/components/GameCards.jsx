@@ -66,7 +66,7 @@ const GameCard = ({ game }) => {
           target="_blank" 
           rel="noopener noreferrer" 
           className="pointer">
-            <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
+            <div className="flex underline gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
               <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
               {game.local}
             </div>
@@ -153,7 +153,7 @@ const GameCardNone = ({ game }) => {
           target="_blank" 
           rel="noopener noreferrer" 
           className="pointer">
-          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
+          <div className="flex underline gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
             <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
             {game.local}
           </div>
