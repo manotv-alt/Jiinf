@@ -78,7 +78,7 @@ const SupporterBoard = () => {
                 ></div>
               </div>
               <span className="ml-4 text-sm text-white font-semibold">
-                {team.total_votos} votos
+                {team.total_votos} pontos
               </span>
             </div>
           </div>
