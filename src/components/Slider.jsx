@@ -87,6 +87,7 @@ const Slider = ({ modalities, slidesToShow }) => {
 };
 
 const Carousel = ({ images }) => {
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const { loadingHome } = useApi();
 
@@ -135,7 +136,7 @@ const Carousel = ({ images }) => {
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-500"
         style={{ backgroundImage: `url('${images[currentIndex]}')` }}
-      ></div>
+      >{console.log(images[currentIndex])}</div>
 
       <button
         onClick={prevSlide}

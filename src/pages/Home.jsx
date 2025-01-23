@@ -38,7 +38,7 @@ export function Home() {
             {/* Home text */}
             <div className="absolute top-0 flex items-center justify-center text-justify">
               <h2 className="hidden lg:flex text-white text-sm xl:text-base mx-20 mt-32 font-semibold text-justify">
-                {home.texto ? home.texto : ' '}
+                {home && (home.texto ? home.texto : ' ')}
               </h2>
             </div>
           </div>
