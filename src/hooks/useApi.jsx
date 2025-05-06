@@ -8,10 +8,13 @@ const useApi = () => {
     const [teams, setTeams] = useState([]);
     const [modalities, setModalities] = useState([]);
     const [gameData, setGameData] = useState([]);
+    const [sportModalities, setSportModalities] = useState([]);
+    const [allPoints, setAllPoints] = useState([]);
     const [loadingHome, setLoadingHome] = useState(true);
     const [loadingTeams, setLoadingTeams] = useState(true);
     const [loadingCalendar, setLoadingCalendar] = useState(true);
     const [loadingModalities, setLoadingModalities] = useState(true);
+    const [loadingSimulator, setLoadingSimulator] = useState(true);
     const [background, setBackground] = useState(null);
     const [results, setResults] = useState([]);
     const [home, setHome] = useState([]);
@@ -127,6 +130,26 @@ const useApi = () => {
       }
     };
 
+    const fetchSimulator = async () => {
+      try {
+        const url = new Fetch(urlApi);
+        setLoadingSimulator(true);
+
+        //Pegando os pontos de cada time
+        const ax = await url.GetAllPoints();
+        setAllPoints(ax);
+
+        const ax2 = await url.GetSimulationModalities();
+        setSportModalities(ax2);
+
+      } catch (err) {
+        setIsError(true);
+        console.log(err);
+      } finally {
+        setLoadingSimulator(false);            
+      }
+    };
+
     const UpdateVotes = async (teamId) => {
         try {
           setLoadingHome(true);
@@ -152,6 +175,71 @@ const useApi = () => {
           setLoadingHome(false);            
         }
     };
+
+    const UpdateModality = async (modality) => {
+      try {
+        setLoadingSimulator(true);
+        const response = await fetch(`${urlApi}/api/v1/simulation/modalidade/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "modalidade_nome": modality
+          }),
+        });
+    
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        setIsError(true);
+        throw error;
+      } finally {
+        setLoadingSimulator(false);
+      }
+    };    
+
+    const ClearAll = async () => {
+      try {
+        setLoadingSimulator(true);
+        const response = await fetch(`${urlApi}/api/v1/simulation/limpar/`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+    
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        setIsError(true);
+        throw error;
+      } finally {
+        setLoadingSimulator(false);
+      }
+    };    
+
+    const UpdateClassification = async (formData) => {
+      try {
+        setLoadingSimulator(true);
+          await fetch(`${urlApi}/api/v1/simulation/atualizar_classificacao/`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ // Aqui você converte o objeto para JSON
+                "classifica": formData.posicao,
+                "nome_time": formData.time,
+                "modalidade_nome": formData.modalidade,
+              }),
+          });
+      } catch (error) {
+          setIsError(true);
+          throw error;
+      } finally {
+        setLoadingSimulator(false);            
+      }
+  };
   
     //Fetch infos called
     useEffect(() => {
@@ -161,6 +249,7 @@ const useApi = () => {
       fetchModalities();
       fetchHome();
       fetchResults();
+      fetchSimulator();
 
       resposiveBack();
 
@@ -173,7 +262,7 @@ const useApi = () => {
       };
     }, []);
 
-    return { home, teams, results, modalities, gameData, loadingHome, loadingCalendar, loadingModalities, loadingTeams, background, isError, isOnline, UpdateVotes };
+    return { home, teams, results, sportModalities, ClearAll, UpdateModality, fetchSimulator, UpdateClassification, modalities, allPoints, gameData, loadingHome, loadingSimulator, loadingCalendar, loadingModalities, loadingTeams, background, isError, isOnline, UpdateVotes };
 };
 
 export default useApi;

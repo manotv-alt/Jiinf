@@ -92,4 +92,40 @@ export class Fetch {
             throw e
         }
     }
+
+    async GetAllPoints() {
+        try {
+            const response = fetch(this.BASEURL + "/api/v1/simulation/resultado/" , {
+                method: "GET",
+            })
+
+            if(!response) {
+                const errorResponse = await response.json(); 
+                throw new Error(errorResponse.error || "Erro desconhecido");
+            }
+
+            return (await response).json()
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
+
+    async GetSimulationModalities() {
+        try {
+            const response = fetch(this.BASEURL + "/api/v1/simulation/modalidades/" , {
+                method: "GET",
+            })
+
+            if(!response) {
+                const errorResponse = await response.json(); 
+                throw new Error(errorResponse.error || "Erro desconhecido");
+            }
+
+            return (await response).json()
+        } catch (e) {
+            console.log(e)
+            throw e
+        }
+    }
 }

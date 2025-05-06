@@ -136,7 +136,7 @@ const Carousel = ({ images }) => {
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-500"
         style={{ backgroundImage: `url('${images[currentIndex]}')` }}
-      >{console.log(images[currentIndex])}</div>
+      ></div>
 
       <button
         onClick={prevSlide}
