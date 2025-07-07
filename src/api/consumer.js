@@ -4,7 +4,7 @@ export class Fetch {
     }
     async GetCalendar() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/eventos/", {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/eventos/", {
                 method: "GET",
             })
 
@@ -22,7 +22,7 @@ export class Fetch {
 
     async GetModalities() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/modalidades/" , {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/modalidades/" , {
                 method: "GET",
             })
 
@@ -40,7 +40,7 @@ export class Fetch {
 
     async GetTeams() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/equipes/" , {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/equipes/" , {
                 method: "GET",
             })
 
@@ -59,7 +59,7 @@ export class Fetch {
     
     async GetResults() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/resultado/" , {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/resultado/" , {
                 method: "GET",
             })
 
@@ -77,7 +77,7 @@ export class Fetch {
 
     async GetHome() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/hub/" , {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/hub/" , {
                 method: "GET",
             })
 
@@ -95,7 +95,7 @@ export class Fetch {
 
     async GetAllPoints() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/simulation/resultado/" , {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/simulation/resultado/" , {
                 method: "GET",
             })
 
@@ -113,7 +113,7 @@ export class Fetch {
 
     async GetSimulationModalities() {
         try {
-            const response = fetch(this.BASEURL + "/api/v1/simulation/modalidades/" , {
+            const response = fetch(this.BASEURL + "/api/v1/jiinf/simulation/modalidades/" , {
                 method: "GET",
             })
 

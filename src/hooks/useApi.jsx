@@ -153,7 +153,7 @@ const useApi = () => {
     const UpdateVotes = async (teamId) => {
         try {
           setLoadingHome(true);
-            const response = await fetch(`${urlApi}/api/v1/times/atualizar_pontos/${teamId}/`, {
+            const response = await fetch(`${urlApi}/api/v1/jiinf/times/atualizar_pontos/${teamId}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -179,7 +179,7 @@ const useApi = () => {
     const UpdateModality = async (modality) => {
       try {
         setLoadingSimulator(true);
-        const response = await fetch(`${urlApi}/api/v1/simulation/modalidade/`, {
+        const response = await fetch(`${urlApi}/api/v1/jiinf/simulation/modalidade/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -202,7 +202,7 @@ const useApi = () => {
     const ClearAll = async () => {
       try {
         setLoadingSimulator(true);
-        const response = await fetch(`${urlApi}/api/v1/simulation/limpar/`, {
+        const response = await fetch(`${urlApi}/api/v1/jiinf/simulation/limpar/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -222,7 +222,7 @@ const useApi = () => {
     const UpdateClassification = async (formData) => {
       try {
         setLoadingSimulator(true);
-          await fetch(`${urlApi}/api/v1/simulation/atualizar_classificacao/`, {
+          await fetch(`${urlApi}/api/v1/jiinf/simulation/atualizar_classificacao/`, {
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
