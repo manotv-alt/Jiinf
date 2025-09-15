@@ -3,6 +3,7 @@ import OfflineScreen from './pages/Offline';
 import Error404 from './pages/404';
 import { Outlet } from 'react-router-dom'
 import useApi from './hooks/useApi';
+import bg from './assets/backgrounds/largeback.png';
 
 function App() {
 
@@ -24,9 +25,9 @@ function App() {
     }
     else {
       return (
-        <div className='min-h-screen flex flex-col bg-jiinf-background'>
+        <div className='flex flex-col bg-jiinf-background'>
           <Header/>
-            <main className='flex-grow mb-20'>
+            <main className='flex-grow bg-cover bg-center'>
               <Outlet/>
             </main>
           <Footer/>

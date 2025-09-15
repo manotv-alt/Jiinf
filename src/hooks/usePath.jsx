@@ -1,14 +1,10 @@
-import { useLocation } from "react-router-dom"
+import { useLocation } from 'react-router-dom';
 
-//Localization pathname function
 export const usePath = () => {
+    const { pathname } = useLocation();
 
     const isCurrentPage = (link) => {
-        const { pathname } = useLocation();
-
-        if (link === pathname) return true;
-
-        return false;
+        return link === pathname;
     };
 
     return {

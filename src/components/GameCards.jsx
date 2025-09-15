@@ -16,71 +16,71 @@ const GameCard = ({ game }) => {
   const dateLabel = date ? date.label : "Data não encontrada";
 
   return (
-    <div className="w-11/12 ring-2 ring-jiinf-primary mx-auto bg-jiinf-lightskin text-white p-4 rounded-lg flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 mb-4 shadow-lg min-h-28 overflow-hidden">
+    <div className="w-11/12 mx-auto ring-2 ring-jiinf-primary bg-jiinf-lightskin text-white p-4 rounded-lg flex flex-col justify-center items-center mb-4 shadow-lg overflow-x-auto">
       
-      <div className="flex flex-col md:flex-row w-full items-center">
+      <div className="flex flex-col w-full items-center">
         
         {/*Left section container*/}
-        <div className="flex text-xl md:min-w-[100px] lg:min-w-[280px] font-semibold flex-col items-center justify-center w-full md:w-1/4 mb-4 md:mb-0">
-          <div className="text-center">
-            <p className="text-jiinf-primary text-lg">{game.desc}</p>
-            <h3 className="text-2xl lg:text-4xl font-SuperDario text-jiinf-primary">{game.modalidade.toUpperCase()}</h3>
-            <p className="text-lg font-semibold text-jiinf-primary">{game.naipe}</p>
+        <div className="flex text-xl font-semibold items-center justify-between mx-6 w-full mb-4">
+          <div className="text-left">
+            <h3 className="text-4xl font-SuperDario text-jiinf-primary">{game.modalidade.toUpperCase()}</h3>
+            <p className="text-jiinf-secondary text-lg">{game.desc}</p>
           </div>
+            <p className="text-lg font-semibold text-jiinf-secondary">{game.naipe}</p>
         </div>
   
         {/*Left dividers*/}
-        <div className="md:hidden w-full border-b-[1.5px] border-jiinf-primary"></div>
-        <div className="hidden md:block border-l-[2px] border-jiinf-primary h-32 ml-4 mr-16"></div>
+        <div className="w-full border-b-[1.5px] border-jiinf-primary"></div>
   
         {/*Middle section container*/}
         <div className="flex flex-row w-full items-center justify-between mt-4">
-          <div className="flex flex-col md:min-w-[80px] text-center justify-center items-center">
+          <div className="flex flex-col text-center justify-center items-center">
             <img src={game.TimeA.url_image} alt="Logo do Time A" className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" />
-            <p className="hidden sm:flex text-base md:text-lg font-semibold text-jiinf-primary">{game.TimeA.nome}</p>
+            <p className="hidden sm:flex text-base font-semibold text-jiinf-primary">{game.TimeA.nome}</p>
           </div>
   
           {/*Score section*/}
           <div className='flex flex-row w-full justify-center gap-8 md:justify-between md:gap-0 md:mx-4 lg:mx-20 items-center'>
-            <p className="text-2xl text-center md:text-4xl font-bold text-jiinf-primary">{game.placarA}</p>
+            <p className="text-2xl text-center md:text-3xl font-bold text-jiinf-primary">{game.placarA}</p>
             <p className="text-2xl font-bold text-jiinf-primary mx-2">vs</p>
-            <p className="text-2xl text-center md:text-4xl font-bold text-jiinf-primary">{game.placarB}</p>
+            <p className="text-2xl text-center md:text-3xl font-bold text-jiinf-primary">{game.placarB}</p>
           </div>
   
-          <div className="flex flex-col md:min-w-[80px] text-center items-center">
+          <div className="flex flex-col text-center items-center">
             <img src={game.TimeB.url_image} alt="Logo do Time B" className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" />
-            <p className="hidden sm:flex text-base md:text-lg font-semibold text-jiinf-primary">{game.TimeB.nome}</p>
+            <p className="hidden sm:flex text-base font-semibold text-jiinf-primary">{game.TimeB.nome}</p>
           </div>
         </div>
 
         </div>
   
         {/*Right dividers*/}
-        <div className="md:hidden w-full border-b-[1.5px] border-jiinf-primary mt-4"></div>
-        <div className="hidden md:block border-r-[2px] border-jiinf-primary h-32 ml-16 md:mr-4"></div>
+        <div className="w-full border-b-[1.5px] border-jiinf-primary mt-4"></div>
   
         {/*Right section container*/}
-        <div className="flex flex-col md:min-w-[100px] lg:min-w-[280px] mt-2 items-center justify-center text-center">
-          <a 
-          href={game.localizacao_url}
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="pointer">
-            <div className="flex underline gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
-              <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
-              {game.local}
+        <div className="flex w-full mt-4 items-center text-sm justify-between text-center">
+          <div className="flex flex-col items-start gap-1">
+            <div className="flex gap-2 justify-center items-center flex-row  text-jiinf-primary font-bold">
+              <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
+              {game.horario}
             </div>
-          </a>
+
+            <div className=" text-jiinf-primary font-semibold">
+              {dateLabel}
+            </div>
+            <a 
+            href={game.localizacao_url}
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="pointer">
+              <div className="flex underline gap-2 justify-center items-center flex-row  text-jiinf-secondary font-bold">
+                <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
+                {game.local}
+              </div>
+            </a>
+          </div>
           
 
-          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
-            <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
-            {game.horario}
-          </div>
-
-          <div className="lg:text-base md:text-sm text-jiinf-primary font-semibold">
-            {dateLabel}
-          </div>
 
           <div className={`px-8 text-center md:px-4 py-2 rounded-lg mt-2 ${game.status === 'Finalizado' ? 'bg-green-500' : 'bg-jiinf-primary'}`}>
             {game.status === 'Finalizado' ? 'Finalizado' : 'Não iniciado'}
@@ -108,33 +108,32 @@ const GameCardNone = ({ game }) => {
   const dateLabel = date ? date.label : "Data não encontrada";
 
   return (
-    <div className="w-11/12 ring-2 ring-jiinf-primary mx-auto bg-jiinf-lightskin text-white p-4 rounded-lg flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 mb-4 shadow-lg min-h-28 overflow-hidden">
+    <div className="w-11/12 mx-auto ring-2 ring-jiinf-primary bg-jiinf-lightskin text-white p-4 rounded-lg flex flex-col justify-center items-center mb-4 shadow-lg overflow-x-auto">
       
-      <div className="flex flex-col md:flex-row w-full items-center">
+      <div className="flex flex-col w-full items-center">
         
         {/*Left section container*/}
-        <div className="flex text-xl md:min-w-[100px] lg:min-w-[280px] font-semibold flex-col items-center justify-center w-full md:w-1/4 mb-4 md:mb-0">
-          <div className="text-center">
-            <p className="text-jiinf-primary text-lg">{game.desc}</p>
-            <h3 className="text-2xl lg:text-4xl font-SuperDario text-jiinf-primary">{game.modalidade.toUpperCase()}</h3>
-            <p className="text-lg font-semibold text-jiinf-primary">{game.naipe}</p>
+        <div className="flex text-xl font-semibold items-center justify-between mx-6 w-full mb-4">
+          <div className="text-left">
+            <h3 className="text-4xl font-SuperDario text-jiinf-primary">{game.modalidade.toUpperCase()}</h3>
+            <p className="text-jiinf-secondary text-lg">{game.desc}</p>
           </div>
+            <p className="text-lg font-semibold text-jiinf-secondary">{game.naipe}</p>
         </div>
 
         {/*Left dividers*/}
-        <div className="md:hidden w-full border-b-[1.5px] border-jiinf-primary"></div>
-        <div className="hidden md:block border-l-[2px] border-jiinf-primary h-32 ml-4 mr-16"></div>
+        <div className="w-full border-b-[1.5px] border-jiinf-primary"></div>
   
         {/*Middle section container*/}
-        <div className="flex flex-row w-full gap-8 md:gap-0 justify-center items-center md:justify-between mt-4">
+        <div className="flex flex-row w-full gap-8 justify-center items-center mt-4">
           {teams.map((team, index) => (
-            <div key={index} className="flex flex-col md:w-[76px] lg:w-[80px] text-center items-center">
+            <div key={index} className="flex flex-col w-full text-center items-center">
               <img
                 src={team.url_image} 
                 alt="Logo time" 
-                className="min-w-12 h-12 md:min-w-14 md:min-h-14 lg:min-h-16 lg:min-w-16 rounded-full mb-1" 
+                className="min-w-12 h-12 md:min-w-16 md:min-h-16 rounded-full mb-1" 
               />
-              <p className="hidden md:flex text-base w-full lg:text-lg font-semibold text-jiinf-primary">
+              <p className="flex text-base font-semibold text-jiinf-primary">
                 {team.nome}
               </p>
             </div>
@@ -142,32 +141,33 @@ const GameCardNone = ({ game }) => {
         </div>
   
         {/*Right dividers*/}
-        <div className="md:hidden w-full border-b-[1.5px] border-jiinf-primary mt-4"></div>
-        <div className="hidden md:block border-r-[2px] border-jiinf-primary h-32 ml-16 md:mr-4"></div>
+        <div className="w-full border-b-[1.5px] border-jiinf-primary mt-4"></div>
   
         {/*Right section container*/}
-        <div className="flex flex-col md:min-w-[100px] lg:min-w-[280px] mt-2 items-center justify-center text-center">
+        <div className="flex w-full mt-4 items-center text-sm justify-between text-center">
+          <div className="flex flex-col items-start gap-1">            
+            <div className="flex gap-2 justify-center items-center flex-row text-jiinf-primary font-bold">
+              <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
+              {game.horario}
+            </div>
+
+            <div className="text-jiinf-primary font-semibold">{dateLabel}</div>
+            
+            <a 
+            href={game.localizacao_url}
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="pointer">
+            <div className="flex underline gap-2 justify-center items-center flex-row text-jiinf-secondary font-bold">
+              <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
+              {game.local}
+            </div>
+            </a>
           
-          <a 
-          href={game.localizacao_url}
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="pointer">
-          <div className="flex underline gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-secondary font-bold">
-            <MapPinned className="h-4 w-4 lg:h-5 lg:w-5"/>
-            {game.local}
           </div>
-          </a>
-          
-          
-          <div className="flex gap-2 justify-center items-center flex-row lg:text-lg md:text-sm text-jiinf-primary font-bold">
-            <Clock className="h-4 w-4 lg:h-5 lg:w-5"/>
-            {game.horario}
-          </div>
-          <div className="lg:text-base md:text-sm text-jiinf-primary font-semibold">{dateLabel}</div>
-          <div className={`px-8 text-center md:px-4 py-2 rounded-lg mt-2 ${game.status === 'Finalizado' ? 'bg-green-500' : 'bg-jiinf-primary'}`}>
-            {game.status === 'Finalizado' ? 'Finalizado' : 'Não iniciado'}
-          </div>
+            <div className={`px-8 text-center md:px-4 py-2 rounded-lg mt-2 ${game.status === 'Finalizado' ? 'bg-green-500' : 'bg-jiinf-primary'}`}>
+              {game.status === 'Finalizado' ? 'Finalizado' : 'Não iniciado'}
+            </div>
         </div>
 
       </div>
