@@ -6,8 +6,8 @@ export function Teams() {
   const { teams, loadingTeams } = useApi();
 
   return (
-    <div className="pt-8 flex flex-col w-full items-center justify-center">
-      <h1 className="font-SuperDario text-6xl md:text-7xl text-jiinf-titles pb-10">PARTICIPANTES</h1>
+    <div className="pt-8 pb-12 flex flex-col w-full items-center justify-center">
+      <h1 className="font-SuperDario text-6xl md:text-7xl text-jiinf-titles pb-8">PARTICIPANTES</h1>
 
       {/* Teams card container */}
       <div className="w-full md:px-12 lg:px-16">

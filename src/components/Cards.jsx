@@ -43,7 +43,7 @@ const ModalityCard = ({ name, description, imgSrc }) => {
 
   return (
     <div
-      className={`relative aspect-[6/9] w-72 bg-jiinf-lightskin border-jiinf-primary border-4 rounded-xl cursor-pointer transition-transform duration-200 select-none flex flex-col items-center justify-start
+      className={`relative aspect-[6/9] w-64 bg-jiinf-lightskin border-jiinf-primary border-4 rounded-xl cursor-pointer transition-transform duration-200 select-none flex flex-col items-center justify-start
         ${isHovered || clicked ? 'transform scale-105' : ''}
       `}
       onClick={handleClick}
@@ -56,10 +56,10 @@ const ModalityCard = ({ name, description, imgSrc }) => {
     >
       <div className="flex flex-col p-4 text-jiinf-labels">
         <div className='flex flex-col items-center gap-4'>
-          <img src={imgSrc} alt="Ícone do Esporte" className="w-32 h-32 rounded-full border-2 border-black" />
+          <img src={imgSrc} alt="Ícone do Esporte" className="w-28 h-28 rounded-full border-2 border-black" />
           <h3 className="text-4xl font-SuperDario text-center">{name.toUpperCase()}</h3>
         </div>
-        <p className="text-lg mt-8 font-semibold text-center">{description}</p>
+        <p className="text-base mt-8 font-semibold text-center">{description}</p>
       </div>
     </div>
   );  
@@ -145,7 +145,7 @@ const TeamCard = ({ title, description, imageSrc }) => {
         <h2 className="text-4xl font-SuperDario mb-2 text-center pb-4">{title.toUpperCase()}</h2>
         <div className="flex justify-center pb-4">
           <img
-            className="rounded-full ring-2 ring-white h-36 w-36"
+            className="rounded-full ring-2 ring-white h-32 w-32"
             src={imageSrc}
             alt={title}
           />

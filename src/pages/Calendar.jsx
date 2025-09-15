@@ -69,7 +69,7 @@ export function Calendar() {
       {loadingCalendar ? (
         <Loading />
       ) : (
-        <div className="flex flex-col w-full gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4 mb-10">
           {noGamesFound ? (
             <h2 className="flex w-full mt-8 h-full justify-center text-center items-center text-3xl font-semibold">
               Nenhum esporte encontrado
