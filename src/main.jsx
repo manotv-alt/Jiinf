@@ -7,6 +7,8 @@ import { Home } from './pages/Home.jsx';
 import { Teams } from './pages/Teams.jsx';
 import { Calendar } from './pages/Calendar.jsx';
 import { Modalities } from './pages/Modalities.jsx';
+import { Simulator } from './pages/Simulator.jsx';
+import { setupInactivityReload } from './components/Loading.jsx';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +33,13 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/simulator",
+    element: <Simulator/>
+ },
 ]);
+
+setupInactivityReload(); //Recarrega a página após inatividade
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

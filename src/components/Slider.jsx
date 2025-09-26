@@ -1,53 +1,56 @@
 import { useState, useEffect } from 'react';
 import { ModalityCard } from './Cards';
+import useApi from '../hooks/useApi';
 
 const Slider = ({ modalities, slidesToShow }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const totalCards = modalities.length;
+  const totalCards = modalities?.length || 0;
 
   const preloadImages = (modalities) => {
-    modalities.forEach((modality) => {
+    modalities?.forEach((modality) => {
       const img = new Image();
-      img.src = modality.url_image;
+      img.src = modality?.url_image;
     });
   };
 
   useEffect(() => {
-    preloadImages(modalities);
+    if (modalities?.length > 0) {
+      preloadImages(modalities);
+    }
   }, [modalities]);
 
-  // Prev slider function
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? totalCards - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
-  // Next slider function
   const nextSlide = () => {
     const isLastSlide = currentIndex === totalCards - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
 
-  // Logic to show the visible cards
-  const visibleCards = modalities.slice(currentIndex, currentIndex + slidesToShow).concat(
-    modalities.slice(0, Math.max(0, (currentIndex + slidesToShow) - totalCards))
-  );
+  const visibleCards = totalCards > 0 
+    ? modalities.slice(currentIndex, currentIndex + slidesToShow).concat(
+        modalities.slice(0, Math.max(0, (currentIndex + slidesToShow) - totalCards))
+      )
+    : [];
+
+  if (totalCards === 0) {
+    return <p>Nenhuma modalidade disponível.</p>;
+  }
 
   return (
-    <div className="relative w-full min-h-fit flex flex-col items-center overflow-hidden">
-      {/* Button to prev slider */}
+    <div className="relative w-full flex flex-col items-center overflow-hidden">
       <button
         onClick={prevSlide}
         className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white ring-2 ring-jiinf-primary text-jiinf-primary text-3xl h-12 w-12 rounded-full hover:text-white hover:bg-jiinf-secondary"
-        style={{ zIndex: 100 }}
       >
         &#10094;
       </button>
 
-      {/* Sliders container */}
       <div className="flex justify-center h-[480px] items-center gap-6 transition-transform duration-500 ease-in-out w-full px-6">
         {visibleCards.map((sport, index) => (
           <div
@@ -56,25 +59,22 @@ const Slider = ({ modalities, slidesToShow }) => {
             style={{ flex: `0 0 calc(100% / ${slidesToShow} - 20px)` }}
           >
             <ModalityCard
-              name={sport.nome}
-              description={sport.desc}
-              imgSrc={sport.url_image}
+              name={sport?.nome}
+              description={sport?.desc}
+              imgSrc={sport?.url_image}
             />
           </div>
         ))}
       </div>
 
-      {/* Next slider button */}
       <button
         onClick={nextSlide}
         className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white ring-2 ring-jiinf-primary text-jiinf-primary text-3xl h-12 w-12 rounded-full hover:text-white hover:bg-jiinf-secondary"
-        style={{ zIndex: 100 }}
       >
         &#10095;
       </button>
 
-      {/* Slider index */}
-      <div className="flex mt-6 space-x-2 md:space-x-4">
+      <div className="flex mt-2 space-x-2">
         {modalities.map((_, index) => (
           <div
             key={index}
@@ -87,10 +87,12 @@ const Slider = ({ modalities, slidesToShow }) => {
 };
 
 const Carousel = ({ images }) => {
+  
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { loadingHome } = useApi();
 
   const preloadImages = (imageUrls) => {
-    imageUrls.forEach((url) => {
+    imageUrls?.forEach((url) => {
       const img = new Image();
       img.src = url;
     });
@@ -114,8 +116,10 @@ const Carousel = ({ images }) => {
   }, [images]);
 
   useEffect(() => {
-    preloadImages(images);
-  }, [images]);
+    if (!loadingHome && images?.length > 0) {
+      preloadImages(images);
+    }
+  }, [loadingHome, images]);
 
   useEffect(() => {
     if (currentIndex >= images.length) {
@@ -124,11 +128,11 @@ const Carousel = ({ images }) => {
   }, [images, currentIndex]);
 
   if (!images || images.length === 0) {
-    return null; // Ou um indicador de carregamento
+    return <p>Nenhuma imagem disponível.</p>;
   }
 
   return (
-    <div className="hidden md:flex relative w-full overflow-hidden rounded-lg shadow-lg ring-2 ring-jiinf-primary mt-8 ml-8">
+    <div className="flex relative w-full h-[320px] lg:h-[500px] overflow-hidden rounded-lg shadow-lg ring-2 ring-white">
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-500"
         style={{ backgroundImage: `url('${images[currentIndex]}')` }}
@@ -136,14 +140,14 @@ const Carousel = ({ images }) => {
 
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-4 ring-2 ring-jiinf-primary -translate-y-1/2 w-12 h-12 bg-white text-jiinf-primary hover:text-white p-2 rounded-full hover:bg-jiinf-secondary"
+        className="absolute top-1/2 left-4 ring-2 ring-jiinf-primary -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 bg-white text-jiinf-primary hover:text-white p-2 rounded-full hover:bg-jiinf-secondary"
       >
         &#10094;
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-4 ring-2 ring-jiinf-primary -translate-y-1/2 w-12 h-12 bg-white text-jiinf-primary hover:text-white p-2 rounded-full hover:bg-jiinf-secondary"
+        className="absolute top-1/2 right-4 ring-2 ring-jiinf-primary -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 bg-white text-jiinf-primary hover:text-white p-2 rounded-full hover:bg-jiinf-secondary"
       >
         &#10095;
       </button>
@@ -152,7 +156,7 @@ const Carousel = ({ images }) => {
         {images.map((_, index) => (
           <div
             key={index}
-            className={`w-3 h-3 rounded-full ${
+            className={`w-1 h-1 md:w-3 md:h-3 rounded-full ${
               index === currentIndex ? 'bg-white' : 'bg-white/50'
             }`}
           ></div>

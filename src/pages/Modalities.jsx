@@ -28,19 +28,19 @@ export function Modalities() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full pt-8">
-  <h1 className="font-SuperDario text-center text-6xl md:text-7xl text-jiinf-titles pb-10">
-    MODALIDADES DESTA EDIÇÃO
-  </h1>
+    <div className="flex flex-col justify-evenly lg:justify-normal items-center my-16 md:mt-10 w-full">
+      <h1 className="font-SuperDario text-center w-3/4 text-6xl md:text-7xl text-jiinf-titles mb-8 lg:mb-0">
+        MODALIDADES DESTA EDIÇÃO
+      </h1>
 
-  {/* Modalities card container*/}
-  <div className="flex w-full justify-center items-center">
-    {loadingModalities ? (
-      <Loading />
-    ) : (
-      <Slider modalities={modalities} slidesToShow={slidesToShow}/>
-    )}
-  </div>
-</div>
+      {/* Modalities card container*/}
+      <div className="flex w-full justify-center items-center">
+        {loadingModalities ? (
+          <Loading />
+        ) : (
+          <Slider modalities={modalities} slidesToShow={slidesToShow}/>
+        )}
+      </div>
+    </div>
   );
 }
