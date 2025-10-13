@@ -25,7 +25,7 @@ function App() {
     }
     else {
       return (
-        <div className='flex flex-col bg-jiinf-background'>
+        <div className='flex min-h-screen flex-col bg-jiinf-background'>
           <Header/>
             <main className='flex-grow bg-cover bg-center'>
               <Outlet/>

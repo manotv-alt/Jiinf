@@ -25,13 +25,13 @@ export function Home() {
     isLoading ? (
       <Loading />
     ) : (
-      <div className="flex flex-col md:flex-row py-8 mb-8 justify-evenly mx-6 lg:mx-0 gap-8 lg:gap-0 lg-min-w-screen">
-        <div className="flex px-8 flex-col gap-8 lg:gap-4 text-center justify-between">
+      <div className="flex flex-col md:flex-row py-8 mb-8 justify-evenly mx-6 lg:mx-0 gap-8 lg:gap-0">
+        <div className="flex px-8 w-full overflow-hidden lg:w-2/3 flex-col gap-8 lg:gap-4 text-center justify-between">
           <h2 className="text-3xl font-bold text-jiinf-secondary">Seja bem-vindo(a) aos Jogos Internos do Instituto de Informática!</h2>
           <Carousel images={home.images_url}/>
           <p className="flex flex-col w-full px-4 whitespace-normal items-center text-justify justify-center">{home.texto}</p>
         </div>
-        <div className="flex w-full items-center justify-center lg:justify-between flex-col px-8 lg:pr-8 lg:pl-4 gap-8 lg:gap-4">
+        <div className="flex w-full lg:w-1/3 items-center justify-center lg:justify-between flex-col px-8 lg:pr-8 lg:pl-4 gap-8 lg:gap-4">
           <Classification/>
           <SupporterBoard/>
         </div>

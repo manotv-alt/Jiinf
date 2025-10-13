@@ -27,7 +27,7 @@ function Loading() {
   }, [])
 
   return (
-    <div className="absolute inset-0 min-h-screen min-w-full z-20 bg-blue-800 flex items-center justify-center p-8 overflow-hidden">
+    <div className="absolute inset-0 min-h-screen min-w-full z-20 bg-blue-800 flex items-center justify-center py-8 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-orange-500 rounded-full blur-3xl animate-pulse"></div>
@@ -95,12 +95,12 @@ function Loading() {
 
         {/* Loading Text */}
         <div className="space-y-6">
-          <h2 className="text-4xl font-bold text-white tracking-wider">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-wider">
             {loadingText}
           </h2>
 
           {/* Progress Bar */}
-          <div className="w-96 mx-auto">
+          <div className="w-96 px-4 mx-auto">
             <div className="flex justify-between text-sm text-gray-300 mb-3">
               <span className="font-semibold">PODER DO CERBERUS</span>
               <span className="font-semibold">{Math.round(progress)}%</span>
