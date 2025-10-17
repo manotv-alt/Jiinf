@@ -69,19 +69,21 @@ export function Calendar() {
       {loadingCalendar ? (
         <Loading />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4 mb-10">
+        <div>
           {noGamesFound ? (
             <h2 className="flex w-full mt-8 h-full justify-center text-center items-center text-3xl font-semibold">
               Nenhum esporte encontrado
             </h2>
           ) : (
-            filteredGames.map((game, index) =>
-              game.TimeA.nome === game.TimeB.nome ? (
-                <GameCardNone key={index} game={game} />
-              ) : (
-                <GameCard key={index} game={game} />
-              )
-            )
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-4 mb-10">
+              {filteredGames.map((game, index) =>
+                game.TimeA.nome === game.TimeB.nome ? (
+                  <GameCardNone key={index} game={game} />
+                ) : (
+                  <GameCard key={index} game={game} />
+                )
+              )}
+            </div>
           )}
         </div>
       )}

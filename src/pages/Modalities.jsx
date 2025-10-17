@@ -28,7 +28,7 @@ export function Modalities() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-evenly lg:justify-normal items-center my-16 md:mt-10 w-full">
+    <div className="flex flex-col justify-evenly lg:justify-normal items-center mt-8 mb-16 md:my-16 md:mt-10 w-full">
       <h1 className="font-SuperDario text-center w-3/4 text-6xl md:text-7xl text-jiinf-titles mb-8 lg:mb-0">
         MODALIDADES DESTA EDIÇÃO
       </h1>
