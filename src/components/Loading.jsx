@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 function Loading() {
   const [loadingText, setLoadingText] = useState("NÓS BEBEMOS CACHAÇA")
   const [progress, setProgress] = useState(0)
+  const progressIntervalRef = useRef(null)
 
   useEffect(() => {
     const texts = ["NÓS BEBEMOS CACHAÇA", "E NÃO TEMOS RESSACA", "ISSO AQUI NÃO É ***", "ISSO É UNIFICADAAA!!!"]
@@ -13,16 +14,22 @@ function Loading() {
       setLoadingText(texts[textIndex])
     }, 2200)
 
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 0
-        return prev + Math.random() * 3
-      })
-    }, 150)
+    progressIntervalRef.current = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 95) {
+          // Quando chegar perto de 100%, pare o intervalo para esperar o sinal final
+          clearInterval(progressIntervalRef.current);
+          return 95;
+        }
+        // Avança rápido no início e mais devagar depois
+        const randomIncrement = Math.random() * (100 - prev) * 0.05;
+        return Math.min(prev + randomIncrement, 95); // Não passa de 95% sozinho
+      });
+    }, 150);
 
     return () => {
       clearInterval(textInterval)
-      clearInterval(progressInterval)
+      clearInterval(progressIntervalRef.current)
     }
   }, [])
 
