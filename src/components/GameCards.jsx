@@ -4,11 +4,11 @@ import { MapPinned, Clock } from 'lucide-react';
 const GameCard = ({ game }) => {
 
   const dates = [
-    { value: "1", label: '19/10/2024' },
-    { value: "2", label: '20/10/2024' },
-    { value: "3", label: '26/10/2024' },
-    { value: "4", label: '02/11/2024' },
-    { value: "5", label: '03/11/2024' },
+    { value: "1", label: '18/10/2025' },
+    { value: "2", label: '19/10/2025' },
+    { value: "3", label: '24/10/2025' },
+    { value: "4", label: '25/10/2025' },
+    { value: "5", label: '26/10/2025' },
   ];
 
   {/*Int number conversion to date*/}

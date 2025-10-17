@@ -8,11 +8,11 @@ const DatePicker = ({ onChange }) => {
 
   //Dates of Event
   const dates = [
-    { value: "1", label: '19 de Outubro de 2024' },
-    { value: "2", label: '20 de Outubro de 2024' },
-    { value: "3", label: '26 de Outubro de 2024' },
-    { value: "4", label: '02 de novembro de 2024' },
-    { value: "5", label: '03 de novembro de 2024' },
+    { value: "1", label: '18 de Outubro de 2025' },
+    { value: "2", label: '19 de Outubro de 2025' },
+    { value: "3", label: '24 de Outubro de 2025' },
+    { value: "4", label: '25 de Outubro de 2025' },
+    { value: "5", label: '26 de Outubro de 2025' },
   ];
 
   const handleDateChange = (event) => {

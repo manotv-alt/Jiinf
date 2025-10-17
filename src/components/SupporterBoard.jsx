@@ -34,7 +34,7 @@ const SupporterBoard = () => {
       localStorage.setItem("votedTeams", JSON.stringify(updatedVotes)); // Salva no LocalStorage
       alert("Voto computado com sucesso!");
     } catch (error) {
-      alert("Erro ao votar. Tente novamente.");
+      alert("Você já votou! Tente novamente amanhã.");
     }
   };
 
