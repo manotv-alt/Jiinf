@@ -120,7 +120,7 @@ const Footer = () => {
                         <Instagram className='text-white w-4 md:h-5 md:w-5 hover:text-jiinf-secondary cursor-pointer'/>
                     </a>
                 </div>
-                <p className="text-xs md:text-sm mt-2">© 2024 Unificada. All rights reserved.</p>              
+                <p className="text-xs md:text-sm mt-2">© 2025 Unificada. All rights reserved.</p>              
               </div>
 
               <div className='flex h-full flex-col items-center justify-center'>
