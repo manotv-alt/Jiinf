@@ -1,9 +1,7 @@
 import useApi from "../hooks/useApi";
 import { MapPinned, Clock } from 'lucide-react';
 
-const GameCard = ({ game }) => {
-
-  const dates = [
+const dates = [
     { value: "1", label: '18/10/2025' },
     { value: "2", label: '19/10/2025' },
     { value: "3", label: '24/10/2025' },
@@ -11,6 +9,7 @@ const GameCard = ({ game }) => {
     { value: "5", label: '26/10/2025' },
   ];
 
+const GameCard = ({ game }) => {
   {/*Int number conversion to date*/}
   const date = dates.find((item) => item.value === game.data.toString());
   const dateLabel = date ? date.label : "Data não encontrada";
@@ -94,14 +93,6 @@ const GameCard = ({ game }) => {
 const GameCardNone = ({ game }) => {
 
   const { teams } = useApi();
-
-  const dates = [
-    { value: "1", label: '19/10/2024' },
-    { value: "2", label: '20/10/2024' },
-    { value: "3", label: '26/10/2024' },
-    { value: "4", label: '02/11/2024' },
-    { value: "5", label: '03/11/2024' },
-  ];
 
   {/*Int number conversion to date*/}
   const date = dates.find((item) => item.value === game.data.toString());
