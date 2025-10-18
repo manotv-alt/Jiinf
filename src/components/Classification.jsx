@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Loading } from '../components/Loading'; // Supondo que você tenha este componente
 import goldmedal from '../assets/medals/gold-medal.png';
 import silvermedal from '../assets/medals/silver-medal.png';
 import bronzemedal from '../assets/medals/bronze-medal.png';
@@ -11,10 +10,31 @@ export default function Classification() {
 
     useEffect(() => {
         if (!loadingHome && Array.isArray(results) && results.length > 0) {
-            const sorted = [...results].sort((a, b) => b.total_pontos - a.total_pontos);
-            setSortedTeams(sorted);
+        const sorted = [...results].sort((a, b) => {
+            // 1. Critério: Pontos (descendente)
+            const diffPontos = (b.total_pontos || 0) - (a.total_pontos || 0);
+            if (diffPontos !== 0) {
+            return diffPontos;
+            }
+
+            // 2. Critério: Ouro (descendente)
+            const diffGold = (b.total_medalhas.OURO || 0) - (a.total_medalhas.OURO || 0);
+            if (diffGold !== 0) {
+            return diffGold;
+            }
+
+            // 3. Critério: Prata (descendente)
+            const diffSilver = (b.total_medalhas.PRATA || 0) - (a.total_medalhas.PRATA || 0);
+            if (diffSilver !== 0) {
+            return diffSilver;
+            }
+
+            // 4. Critério: Bronze (descendente)
+            return (b.total_medalhas.BRONZE || 0) - (a.total_medalhas.BRONZE || 0);
+        });
+        setSortedTeams(sorted);
         }
-    }, [loadingHome, results]);
+    }, [loadingHome, loadingTeams, results]);
 
     // Componente para a linha de estatísticas (medalhas e pontos), para evitar repetição
     const StatsRow = ({ team }) => (
