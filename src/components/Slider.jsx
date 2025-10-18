@@ -132,7 +132,7 @@ const Carousel = ({ images }) => {
   }
 
   return (
-    <div className="flex relative w-full h-[320px] lg:h-[500px] overflow-hidden rounded-lg shadow-lg ring-2 ring-white">
+    <div className="hidden md:flex relative w-full h-[320px] lg:h-[500px] overflow-hidden rounded-lg shadow-lg ring-2 ring-white">
       <div
         className="w-full h-full bg-cover bg-center transition-all duration-500"
         style={{ backgroundImage: `url('${images[currentIndex]}')` }}

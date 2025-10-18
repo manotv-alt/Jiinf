@@ -1,6 +1,3 @@
-import goldmedal from "../assets/medals/gold-medal.png";
-import silvermedal from "../assets/medals/silver-medal.png";
-import bronzemedal from "../assets/medals/bronze-medal.png";
 import useApi from "../hooks/useApi";
 import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
@@ -10,19 +7,10 @@ import Classification from "../components/Classification";
 
 export function Home() {
   
-  const { background, home, loadingHome, loadingTeams, results } = useApi();
-  const [ sortedTeams, setSortedTeams ] = useState([]);
-  const isLoading = loadingHome || loadingTeams;
-  
-  useEffect(() => {
-    if (!loadingHome && Array.isArray(results) && results.length > 0) {
-      const sorted = results.sort((a, b) => b.total_pontos - a.total_pontos);
-      setSortedTeams(sorted);
-    }
-  }, [loadingHome, results]);
+  const {home, loadingHome, loadingTeams } = useApi();
 
   return (
-    isLoading ? (
+    loadingHome || loadingTeams ? (
       <Loading />
     ) : (
       <div className="flex flex-col md:flex-row py-8 mb-8 justify-evenly mx-6 lg:mx-0 gap-8 lg:gap-0">

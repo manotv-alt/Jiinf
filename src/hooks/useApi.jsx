@@ -3,6 +3,59 @@ import { useEffect, useState } from "react";
 import mediumback from "../assets/backgrounds/mediumback.png"
 import mobileback from "../assets/backgrounds/mobileback.png"
 
+// Introduce small client-side cache + request deduplication to avoid many network calls when multiple components mount
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const API_TIMEOUT = 10000; // 10s
+
+const inMemoryCache = {
+  teams: null,
+  modalities: null,
+  results: null,
+  home: null,
+  simulator: null
+};
+
+const ongoingFetch = {
+  teams: null,
+  modalities: null,
+  results: null,
+  home: null,
+  simulator: null
+};
+
+const getFromLocal = (key) => {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    const { data, timestamp } = JSON.parse(raw);
+    if (Date.now() - timestamp < CACHE_DURATION) return data;
+    return null;
+  } catch (e) {
+    return null;
+  }
+};
+
+const setLocal = (key, data) => {
+  try {
+    localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+  } catch (e) {
+    // ignore quota errors
+  }
+};
+
+const fetchWithTimeout = async (promiseFactory, timeout = API_TIMEOUT) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+  try {
+    const result = await promiseFactory(controller.signal);
+    clearTimeout(timeoutId);
+    return result;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+  }
+};
+
 const useApi = () => {
 
     const [teams, setTeams] = useState([]);
@@ -48,105 +101,219 @@ const useApi = () => {
       }
     };
 
+    const handleError = (err) => {
+      console.error(err);
+      setIsError(true);
+      if (!navigator.onLine) setIsOnline(false);
+    };
+
     const fetchTeams = async () => {
+      // deduplicate: if there's data in memory, use it; if there's an ongoing fetch, await it
       try {
-        const url = new Fetch(urlApi);
         setLoadingTeams(true);
-        const data = await url.GetTeams();
-        setTeams(data.equipes);
+
+        if (inMemoryCache.teams) {
+          setTeams(inMemoryCache.teams);
+          return inMemoryCache.teams;
+        }
+
+        const local = getFromLocal('teams');
+        if (local) {
+          inMemoryCache.teams = local;
+          setTeams(local);
+          return local;
+        }
+
+        if (ongoingFetch.teams) {
+          const data = await ongoingFetch.teams;
+          setTeams(data);
+          return data;
+        }
+
+        const api = new Fetch(urlApi);
+        ongoingFetch.teams = fetchWithTimeout(async (signal) => {
+          // consumer methods are expected to ignore signal; if needed modify consumer
+          const d = await api.GetTeams();
+          return d && d.equipes ? d.equipes : [];
+        });
+
+        const equipes = await ongoingFetch.teams;
+        inMemoryCache.teams = equipes;
+        setLocal('teams', equipes);
+        setTeams(equipes);
+        ongoingFetch.teams = null;
+        return equipes;
       } catch (err) {
-        setIsError(true);
-        console.log(err);
+        ongoingFetch.teams = null;
+        handleError(err);
+        return [];
       } finally {
-        setTimeout(() => {
-          setLoadingTeams(false);
-        }, 1000);
+        setLoadingTeams(false);
       }
     };
 
     const fetchModalities = async () => {
       try {
-        const url = new Fetch(urlApi);
         setLoadingModalities(true);
-        const ax = await url.GetModalities(urlApi);
+
+        if (inMemoryCache.modalities) {
+          setModalities(inMemoryCache.modalities);
+          return inMemoryCache.modalities;
+        }
+
+        const local = getFromLocal('modalities');
+        if (local) {
+          inMemoryCache.modalities = local;
+          setModalities(local);
+          return local;
+        }
+
+        if (ongoingFetch.modalities) {
+          const data = await ongoingFetch.modalities;
+          setModalities(data);
+          return data;
+        }
+
+        const api = new Fetch(urlApi);
+        ongoingFetch.modalities = fetchWithTimeout(async (signal) => {
+          const ax = await api.GetModalities(urlApi);
+          return ax || [];
+        });
+
+        const ax = await ongoingFetch.modalities;
+        inMemoryCache.modalities = ax;
+        setLocal('modalities', ax);
         setModalities(ax);
+        ongoingFetch.modalities = null;
+        return ax;
       } catch (err) {
-        setIsError(true);
-        console.log(err);
+        ongoingFetch.modalities = null;
+        handleError(err);
+        return [];
       } finally {
-        setTimeout(() => {
-          setLoadingModalities(false);
-        }, 1000);
-        
+        setLoadingModalities(false);
       }
     };
 
     const fetchResults = async () => {
       try {
-        const url = new Fetch(urlApi);
         setLoadingHome(true);
-        const ax = await url.GetResults();
-        setResults(ax.times);
-      } catch (err) {
-        setIsError(true);
-        console.log(err);
-      } finally {
-        setTimeout(() => {
-          setLoadingHome(false);
+
+        if (inMemoryCache.results) {
+          setResults(inMemoryCache.results);
           resposiveBack();
-        }, 1000);
+          return inMemoryCache.results;
+        }
+
+        const local = getFromLocal('results');
+        if (local) {
+          inMemoryCache.results = local;
+          setResults(local);
+          resposiveBack();
+          return local;
+        }
+
+        if (ongoingFetch.results) {
+          const data = await ongoingFetch.results;
+          setResults(data);
+          resposiveBack();
+          return data;
+        }
+
+        const api = new Fetch(urlApi);
+        ongoingFetch.results = fetchWithTimeout(async (signal) => {
+          const ax = await api.GetResults();
+          return ax && ax.times ? ax.times : [];
+        });
+
+        const ax = await ongoingFetch.results;
+        inMemoryCache.results = ax;
+        setLocal('results', ax);
+        setResults(ax);
+        ongoingFetch.results = null;
+        resposiveBack();
+        return ax;
+      } catch (err) {
+        ongoingFetch.results = null;
+        handleError(err);
+        resposiveBack();
+        return [];
+      } finally {
+        setLoadingHome(false);
       }
     };
 
     const fetchHome = async () => {
       try {
-        const url = new Fetch(urlApi);
         setLoadingHome(true);
-        const ax = await url.GetHome();
-        setHome(ax[0]);
+
+        if (inMemoryCache.home) {
+          setHome(inMemoryCache.home);
+          return inMemoryCache.home;
+        }
+
+        const local = getFromLocal('home');
+        if (local) {
+          inMemoryCache.home = local;
+          setHome(local);
+          return local;
+        }
+
+        if (ongoingFetch.home) {
+          const data = await ongoingFetch.home;
+          setHome(data);
+          return data;
+        }
+
+        const api = new Fetch(urlApi);
+        ongoingFetch.home = fetchWithTimeout(async (signal) => {
+          const ax = await api.GetHome();
+          return Array.isArray(ax) ? (ax[0] || {}) : ax || {};
+        });
+
+        const ax = await ongoingFetch.home;
+        inMemoryCache.home = ax;
+        setLocal('home', ax);
+        setHome(ax);
+        ongoingFetch.home = null;
+        return ax;
       } catch (err) {
-        setIsError(true);
-        console.log(err);
+        ongoingFetch.home = null;
+        handleError(err);
+        return {};
       } finally {
-        setTimeout(() => {
-          setLoadingHome(false);            
-        }, 1000);
+        setLoadingHome(false);
       }
     };
 
     const fetchEvents = async () => {
       try {
-        const url = new Fetch(urlApi);
         setLoadingCalendar(true);
-        const ax = await url.GetCalendar();
-        setGameData(ax);
+        const api = new Fetch(urlApi);
+        const ax = await api.GetCalendar();
+        setGameData(ax || []);
       } catch (err) {
-        setIsError(true);
-        console.log(err);
+        handleError(err);
       } finally {
-        setTimeout(() => {
-          setLoadingCalendar(false);            
-        }, 1000);
+        setLoadingCalendar(false);
       }
     };
 
     const fetchSimulator = async () => {
       try {
-        const url = new Fetch(urlApi);
         setLoadingSimulator(true);
 
         //Pegando os pontos de cada time
-        const ax = await url.GetAllPoints();
-        setAllPoints(ax);
+        const api = new Fetch(urlApi);
+        const ax = await api.GetAllPoints();
+        setAllPoints(ax || []);
 
-        const ax2 = await url.GetSimulationModalities();
-        setSportModalities(ax2);
-
+        const ax2 = await api.GetSimulationModalities();
+        setSportModalities(ax2 || []);
       } catch (err) {
-        setIsError(true);
-        console.log(err);
+        handleError(err);
       } finally {
-        setLoadingSimulator(false);            
+        setLoadingSimulator(false);
       }
     };
 
@@ -160,13 +327,22 @@ const useApi = () => {
                 },
             });
 
-            fetchTeams();
-    
-            // Verifica se a resposta não é bem-sucedida (status >= 400)
+            // Se requisição falhar, lança erro e NÃO atualiza o frontend
             if (!response.ok) {
                 const textResponse = await response.text();
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                setIsError(true);
+                throw new Error(`Erro: ${response.status} - ${response.statusText} - ${textResponse}`);
             }
+
+            // Atualiza o estado somente após confirmação de sucesso
+            setTeams(prev => {
+              const updated = prev.map(t => t.time_id === teamId ? { ...t, total_votos: (t.total_votos || 0) + 1 } : t);
+              inMemoryCache.teams = updated;
+              return updated;
+            });
+
+            // refresh teams from server in background but don't block UI
+            fetchTeams().catch(() => {});
 
         } catch (error) {
             setIsError(true);
@@ -197,7 +373,7 @@ const useApi = () => {
       } finally {
         setLoadingSimulator(false);
       }
-    };    
+    };
 
     const ClearAll = async () => {
       try {
@@ -217,7 +393,7 @@ const useApi = () => {
       } finally {
         setLoadingSimulator(false);
       }
-    };    
+    };
 
     const UpdateClassification = async (formData) => {
       try {
@@ -239,24 +415,30 @@ const useApi = () => {
       } finally {
         setLoadingSimulator(false);            
       }
-  };
+    };
   
-    //Fetch infos called
+    //Fetch infos called once per hook instance but deduplicated via inMemory + ongoingFetch
     useEffect(() => {
-      
-      fetchTeams();
-      fetchEvents();
-      fetchModalities();
-      fetchHome();
-      fetchResults();
-      fetchSimulator();
+      const fetchAllData = async () => {
+        try {
+          await Promise.all([
+            fetchTeams(),
+            fetchEvents(),
+            fetchModalities(),
+            fetchHome(),
+            fetchResults(),
+            fetchSimulator()
+          ]);
+        } catch (error) {
+          setIsError(true);
+          console.error('Error fetching data:', error);
+        }
+      };
 
+      fetchAllData();
       resposiveBack();
 
-      //Resizing event being added
       window.addEventListener('resize', resposiveBack);
-  
-      //Removing resizing when disassembling
       return () => {
         window.removeEventListener('resize', resposiveBack);
       };
